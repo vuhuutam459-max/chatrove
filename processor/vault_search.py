@@ -60,8 +60,31 @@ def query_terms(text: str) -> list[str]:
     return list(dict.fromkeys(kept))
 
 
+def fold_d(text: str) -> str:
+    """Vietnamese đ/Đ -> d/D. unicode61's remove_diacritics leaves đ alone
+    (it is its own letter, not d plus a mark), so "da nang" misses "Đà Nẵng"."""
+    return text.replace("đ", "d").replace("Đ", "D")
+
+
+def _spellings(term: str) -> list[str]:
+    # đ only starts a Vietnamese syllable, so a word typed with a leading d may
+    # be stored as đ (and the other way round when typed without diacritics).
+    base = fold_d(term)
+    if " " in base or not base.startswith("d"):
+        return [term]
+    # Keep the term as typed too: "điđâu" folds to "didâu"/"đidâu", neither of
+    # which matches the stored hashtag.
+    return list(dict.fromkeys([term, base, "đ" + base[1:]]))
+
+
+def _term_forms(term: str, prefix: bool) -> list[str]:
+    star = "*" if prefix else ""
+    return [f'"{t}"{star}' for t in _spellings(term)]
+
+
 def _term_expr(term: str, prefix: bool) -> str:
-    return f'"{term}"*' if prefix else f'"{term}"'
+    forms = _term_forms(term, prefix)
+    return forms[0] if len(forms) == 1 else "(" + " OR ".join(forms) + ")"
 
 
 def _wants_prefix(term: str, is_last: bool) -> bool:
@@ -71,6 +94,11 @@ def _wants_prefix(term: str, is_last: bool) -> bool:
     if is_last and len(term) >= 2:
         return True
     return len(term) >= 4 and not term.isascii()
+
+
+def term_forms(terms: list[str]) -> list[list[str]]:
+    """Per term, one FTS5 expression per spelling (see _spellings)."""
+    return [_term_forms(t, _wants_prefix(t, i == len(terms) - 1)) for i, t in enumerate(terms)]
 
 
 def term_exprs(terms: list[str]) -> list[str]:
@@ -119,16 +147,22 @@ def rank_conversations(conn: sqlite3.Connection, text: str, limit: int = 50) -> 
         clauses = exprs
         match = " OR ".join(exprs)
 
-    for clause in clauses:
-        rows = conn.execute("""
-            SELECT m.conversation_id AS cid, MIN(s) AS best FROM (
-                SELECT rowid AS rid, bm25(messages_fts) AS s FROM messages_fts
-                WHERE messages_fts MATCH ? ORDER BY s LIMIT ?
-            ) hits JOIN messages m ON m.id = hits.rid
-            GROUP BY m.conversation_id
-        """, (clause, MSG_CANDIDATES)).fetchall()
-        for cid, best in rows:
-            add(cid, -best)
+    # Each spelling gets its own candidate cap, so a common one ("di"* ~ "diff")
+    # cannot crowd out a rarer one ("đi"); a term scores its best spelling.
+    for forms in ([clauses] if advanced else term_forms(terms)):
+        best: dict[str, float] = {}
+        for form in forms:
+            rows = conn.execute("""
+                SELECT m.conversation_id AS cid, MIN(s) AS best FROM (
+                    SELECT rowid AS rid, bm25(messages_fts) AS s FROM messages_fts
+                    WHERE messages_fts MATCH ? ORDER BY s LIMIT ?
+                ) hits JOIN messages m ON m.id = hits.rid
+                GROUP BY m.conversation_id
+            """, (form, MSG_CANDIDATES)).fetchall()
+            for cid, s in rows:
+                best[cid] = max(best.get(cid, float("-inf")), -s)
+        for cid, s in best.items():
+            add(cid, s)
 
     if _has_table(conn, "conversations_fts"):
         meta_clauses = clauses if _valid_match(conn, "conversations_fts", clauses[0]) else exprs
@@ -145,8 +179,11 @@ def rank_conversations(conn: sqlite3.Connection, text: str, limit: int = 50) -> 
         "SELECT ct.conversation_id, t.name FROM conversation_tags ct "
         "JOIN tags t ON t.id = ct.tag_id").fetchall()
     for cid, name in tag_rows:
-        parts = _WORD.findall(name.lower().replace("_", " "))
-        hits = sum(1 for t in terms if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
+        # Explicit syntax is literal, so its tags are compared without d/đ folding.
+        norm = (lambda x: x) if advanced else fold_d
+        parts = _WORD.findall(norm(name.lower().replace("_", " ")))
+        keys = [norm(t) for t in terms]
+        hits = sum(1 for t in keys if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
         # With explicit syntax a tag alone admits a chat only when it covers every
         # term and nothing is excluded ("kubernetes" yes, "python NOT java" no).
         tag_satisfies = hits == len(terms) and not re.search(r"\bNOT\b", text)

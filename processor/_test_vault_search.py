@@ -28,6 +28,7 @@ def _seed(conn):
         ("c-k8s", "Pod keeps restarting", ["My pod is restarting", "Check kubectl logs --previous"]),
         ("c-cpp", "Linked list crash", ["C++ segfault on delete", "Use valgrind"]),
         ("c-bread", "Sourdough troubleshooting", ["Loaf came out dense at 18°C"]),
+        ("c-vi", "Du lịch Đà Nẵng", ["Mình đi làm cả ngày", "tu van dien thoai"]),
     ]:
         conn.execute("INSERT INTO conversations(id, account_id, title) VALUES (?, 1, ?)", (cid, title))
         for seq, text in enumerate(msgs):
@@ -44,6 +45,14 @@ def test_query_terms():
     assert VS.safe_match("ssh: node.js") == '"ssh" OR "node" OR "js"*'
     assert VS.safe_match("договор аренды") == '"договор"* OR "аренды"*'
     assert VS.safe_match("!!!") == ""
+    assert VS.safe_match("da nang") == '("da" OR "đa") OR "nang"*'
+    assert VS.safe_match("đa nang") == '("đa" OR "da") OR "nang"*'
+    assert VS.safe_match("điện") == '("điện"* OR "diện"*)'
+    assert VS.safe_match("di lam") == '("di" OR "đi") OR "lam"*'
+    assert VS.safe_match("nang") == '"nang"*'
+    assert '"điđâu"' in VS.safe_match("#điđâu"), "the typed spelling is always searched"
+    assert VS.safe_match("договор") == '"договор"*'
+
     print("  OK  query_terms / safe_match")
 
 
@@ -57,6 +66,13 @@ def test_ranking_and_safety():
         assert top("restarts") == ["c-k8s"], "porter stemming"
         assert top("kube") == ["c-k8s"], "prefix on last term"
         assert top("sourdough") == ["c-bread"], "title is searchable"
+        for q in ["da nang", "ĐÀ NẴNG", "di lam", "điện thoại", "dien"]:
+            assert top(q) == ["c-vi"], f"Vietnamese d/đ folding: {q}"
+        conn.execute("INSERT INTO conversations(id, account_id, title) VALUES ('c-diff', 1, 'Code review')")
+        conn.executemany("INSERT INTO messages(conversation_id, seq, role, content) VALUES ('c-diff', ?, 'user', ?)",
+                         [(i, "di di diff dig did diffing") for i in range(VS.MSG_CANDIDATES + 50)])
+        assert "c-vi" in [h["id"] for h in VS.rank_conversations(conn, "đi")], \
+            "a common d-spelling doesn't crowd out the đ one"
         assert top("C++ segfault") == ["c-cpp"], "punctuation; lone letters don't outrank real terms"
         assert top('"kubectl logs"') == ["c-k8s"], "advanced FTS syntax still works"
         conn.execute("INSERT INTO tags(name) VALUES ('kubernetes')")
@@ -66,6 +82,12 @@ def test_ranking_and_safety():
             "tags don't bypass explicit NOT"
         assert "c-bread" in [h["id"] for h in VS.rank_conversations(conn, '"kubernetes"')], \
             "a quoted tag still finds tag-only chats"
+        conn.execute("INSERT INTO tags(name) VALUES ('đao')")
+        conn.execute("INSERT INTO conversation_tags(conversation_id, tag_id) "
+                     "SELECT 'c-cpp', id FROM tags WHERE name = 'đao'")
+        assert "c-cpp" in [h["id"] for h in VS.rank_conversations(conn, "dao")], "tags fold d/đ"
+        assert "c-cpp" not in [h["id"] for h in VS.rank_conversations(conn, '"dao"')], \
+            "quoted spelling is literal for tags too"
         conn.execute("UPDATE conversations SET summary = 'About fermentation' WHERE id = 'c-bread'")
         assert top("fermentation") == ["c-bread"], "summary index follows updates"
         conn.close()
