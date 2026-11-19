@@ -156,6 +156,8 @@ def print_table(summary: dict, compare: dict | None = None):
 
 
 def main(argv=None) -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")  # Windows consoles default to cp1252
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--json", help="write per-query results + summary to this file")
     ap.add_argument("--compare", help="results JSON from an earlier run to diff against")
