@@ -68,6 +68,11 @@ def test_ranking_and_safety():
         assert top("sourdough") == ["c-bread"], "title is searchable"
         for q in ["da nang", "ĐÀ NẴNG", "di lam", "điện thoại", "dien"]:
             assert top(q) == ["c-vi"], f"Vietnamese d/đ folding: {q}"
+        conn.execute("INSERT INTO conversations(id, account_id, title) VALUES ('c-diff', 1, 'Code review')")
+        conn.executemany("INSERT INTO messages(conversation_id, seq, role, content) VALUES ('c-diff', ?, 'user', ?)",
+                         [(i, "di di diff dig did diffing") for i in range(VS.MSG_CANDIDATES + 50)])
+        assert "c-vi" in [h["id"] for h in VS.rank_conversations(conn, "đi")], \
+            "a common d-spelling doesn't crowd out the đ one"
         assert top("C++ segfault") == ["c-cpp"], "punctuation; lone letters don't outrank real terms"
         assert top('"kubectl logs"') == ["c-k8s"], "advanced FTS syntax still works"
         conn.execute("INSERT INTO tags(name) VALUES ('kubernetes')")
