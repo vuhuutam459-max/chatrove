@@ -161,6 +161,9 @@ END;
 """
 
 SEARCH_TOKENIZER = "porter unicode61 remove_diacritics 2"
+# Bumped whenever the FTS indexes must be rebuilt; stored in PRAGMA user_version
+# only after a rebuild commits, so an interrupted upgrade retries on next start.
+SEARCH_INDEX_VERSION = 1
 
 
 def _migrate_search_index(conn: sqlite3.Connection) -> list[str]:
@@ -218,8 +221,11 @@ def init_db(db_path: Path) -> sqlite3.Connection:
     if not conn.execute("SELECT 1 FROM sqlite_master WHERE name = 'conversations_fts'").fetchone():
         rebuild.append("conversations_fts")
     conn.executescript(CONVERSATIONS_FTS_SQL)
+    if conn.execute("PRAGMA user_version").fetchone()[0] < SEARCH_INDEX_VERSION:
+        rebuild = ["messages_fts", "canvas_fts", "conversations_fts"]
     for name in rebuild:
         conn.execute(f"INSERT INTO {name}({name}) VALUES ('rebuild')")
+    conn.execute(f"PRAGMA user_version = {SEARCH_INDEX_VERSION}")
     conn.commit()
     return conn
 

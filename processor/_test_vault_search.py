@@ -86,8 +86,30 @@ def test_migrates_old_tokenizer():
     print("  OK  old unicode61 index is rebuilt with porter + conversations_fts backfilled")
 
 
+def test_interrupted_migration_retries():
+    with tempfile.TemporaryDirectory() as tmp:
+        db = Path(tmp) / "v.db"
+        conn = P.init_db(db)
+        _seed(conn)
+        conn.close()
+        # Simulate a crash after the new tables were created but before the
+        # rebuild committed: current tokenizer, empty index, old user_version.
+        conn = sqlite3.connect(db)
+        conn.execute("INSERT INTO messages_fts(messages_fts) VALUES ('delete-all')")
+        conn.execute("INSERT INTO conversations_fts(conversations_fts) VALUES ('delete-all')")
+        conn.execute("PRAGMA user_version = 0")
+        conn.commit()
+        conn.close()
+        conn = P.init_db(db)
+        assert [h["id"] for h in VS.rank_conversations(conn, "restarts")][:1] == ["c-k8s"]
+        assert [h["id"] for h in VS.rank_conversations(conn, "sourdough")][:1] == ["c-bread"]
+        conn.close()
+    print("  OK  interrupted index rebuild is retried on next start")
+
+
 if __name__ == "__main__":
     test_query_terms()
     test_ranking_and_safety()
     test_migrates_old_tokenizer()
+    test_interrupted_migration_retries()
     print("\nvault_search: ALL OK")
