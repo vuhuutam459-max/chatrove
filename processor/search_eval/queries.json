@@ -1,0 +1,548 @@
+{
+ "_note": "Search-quality benchmark queries over corpus.json. relevant: conv id -> grade (2 = the chat the user wants, 1 = also useful). Categories: keyword, natural, morphology, punctuation, metadata, prefix, i18n, hard (paraphrases / vocabulary mismatch / cross-lingual, added after the fixes and not tuned against).",
+ "queries": [
+  {
+   "id": "kw-asyncio",
+   "category": "keyword",
+   "query": "asyncio",
+   "relevant": {
+    "eval-py-asyncio": 2,
+    "eval-py-timeout": 1
+   }
+  },
+  {
+   "id": "kw-crashloop",
+   "category": "keyword",
+   "query": "CrashLoopBackOff",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   }
+  },
+  {
+   "id": "kw-vlookup",
+   "category": "keyword",
+   "query": "VLOOKUP",
+   "relevant": {
+    "eval-excel-lookup": 2
+   }
+  },
+  {
+   "id": "kw-valgrind",
+   "category": "keyword",
+   "query": "valgrind",
+   "relevant": {
+    "eval-cpp-segfault": 2
+   }
+  },
+  {
+   "id": "kw-reflog",
+   "category": "keyword",
+   "query": "git reflog",
+   "relevant": {
+    "eval-git-rebase": 2
+   }
+  },
+  {
+   "id": "kw-pyproject",
+   "category": "keyword",
+   "query": "twine pypi",
+   "relevant": {
+    "eval-py-pypi": 2
+   }
+  },
+  {
+   "id": "kw-ryokan",
+   "category": "keyword",
+   "query": "ryokan",
+   "relevant": {
+    "eval-kyoto": 2
+   }
+  },
+  {
+   "id": "nl-cancel-coroutine",
+   "category": "natural",
+   "query": "how do I cancel a coroutine that takes too long",
+   "relevant": {
+    "eval-py-timeout": 2,
+    "eval-py-asyncio": 1
+   }
+  },
+  {
+   "id": "nl-containers-talk",
+   "category": "natural",
+   "query": "containers can't connect to each other",
+   "relevant": {
+    "eval-docker-network": 2
+   }
+  },
+  {
+   "id": "nl-docker-smaller",
+   "category": "natural",
+   "query": "make my docker image smaller",
+   "relevant": {
+    "eval-docker-size": 2
+   }
+  },
+  {
+   "id": "nl-pod-restart",
+   "category": "natural",
+   "query": "pod keeps restarting",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   }
+  },
+  {
+   "id": "nl-502",
+   "category": "natural",
+   "query": "nginx 502 bad gateway",
+   "relevant": {
+    "eval-nginx-proxy": 2
+   }
+  },
+  {
+   "id": "nl-cors",
+   "category": "natural",
+   "query": "fetch blocked by CORS policy",
+   "relevant": {
+    "eval-cors-flask": 2
+   }
+  },
+  {
+   "id": "nl-undo-rebase",
+   "category": "natural",
+   "query": "undo a rebase that went wrong",
+   "relevant": {
+    "eval-git-rebase": 2
+   }
+  },
+  {
+   "id": "nl-api-key-github",
+   "category": "natural",
+   "query": "accidentally pushed my api key to github",
+   "relevant": {
+    "eval-git-secret": 2
+   }
+  },
+  {
+   "id": "nl-slow-postgres",
+   "category": "natural",
+   "query": "slow postgres query",
+   "relevant": {
+    "eval-sql-index": 2
+   }
+  },
+  {
+   "id": "nl-kyoto",
+   "category": "natural",
+   "query": "what should we see in Kyoto",
+   "relevant": {
+    "eval-kyoto": 2
+   }
+  },
+  {
+   "id": "nl-bread",
+   "category": "natural",
+   "query": "bread came out dense",
+   "relevant": {
+    "eval-sourdough": 2
+   }
+  },
+  {
+   "id": "nl-knee",
+   "category": "natural",
+   "query": "knee hurts after running",
+   "relevant": {
+    "eval-knee": 2,
+    "eval-marathon": 1
+   }
+  },
+  {
+   "id": "nl-ask-raise",
+   "category": "natural",
+   "query": "how to ask for a higher salary",
+   "relevant": {
+    "eval-salary": 2
+   }
+  },
+  {
+   "id": "nl-cat",
+   "category": "natural",
+   "query": "what did the vet advice say about my cat vomiting",
+   "relevant": {
+    "eval-cat": 2
+   }
+  },
+  {
+   "id": "nl-react-twice",
+   "category": "natural",
+   "query": "why does useEffect run twice",
+   "relevant": {
+    "eval-react-effect": 2
+   }
+  },
+  {
+   "id": "nl-pip-error",
+   "category": "natural",
+   "query": "pip install externally managed environment error",
+   "relevant": {
+    "eval-py-venv": 2
+   }
+  },
+  {
+   "id": "nl-taxes",
+   "category": "natural",
+   "query": "do freelancers pay taxes every quarter",
+   "relevant": {
+    "eval-freelance-tax": 2
+   }
+  },
+  {
+   "id": "mo-restarting-pods",
+   "category": "morphology",
+   "query": "restarting pods",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   }
+  },
+  {
+   "id": "mo-overfitting",
+   "category": "morphology",
+   "query": "overfitting",
+   "relevant": {
+    "eval-overfit": 2
+   }
+  },
+  {
+   "id": "mo-negotiate",
+   "category": "morphology",
+   "query": "negotiate offer",
+   "relevant": {
+    "eval-salary": 2
+   }
+  },
+  {
+   "id": "mo-tapering",
+   "category": "morphology",
+   "query": "tapering weeks",
+   "relevant": {
+    "eval-marathon": 2
+   }
+  },
+  {
+   "id": "mo-yellow-leaves",
+   "category": "morphology",
+   "query": "yellowing leaf",
+   "relevant": {
+    "eval-monstera": 2
+   }
+  },
+  {
+   "id": "mo-renaming",
+   "category": "morphology",
+   "query": "renaming photos",
+   "relevant": {
+    "eval-bash-rename": 2
+   }
+  },
+  {
+   "id": "pu-cpp",
+   "category": "punctuation",
+   "query": "C++ segmentation fault",
+   "relevant": {
+    "eval-cpp-segfault": 2
+   }
+  },
+  {
+   "id": "pu-nodejs",
+   "category": "punctuation",
+   "query": "node.js require is not defined",
+   "relevant": {
+    "eval-node-esm": 2
+   }
+  },
+  {
+   "id": "pu-email",
+   "category": "punctuation",
+   "query": "e-mail regex",
+   "relevant": {
+    "eval-regex-email": 2
+   }
+  },
+  {
+   "id": "pu-na",
+   "category": "punctuation",
+   "query": "#N/A error",
+   "relevant": {
+    "eval-excel-lookup": 2
+   }
+  },
+  {
+   "id": "pu-pyproject",
+   "category": "punctuation",
+   "query": "pyproject.toml",
+   "relevant": {
+    "eval-py-pypi": 2
+   }
+  },
+  {
+   "id": "pu-ssh-colon",
+   "category": "punctuation",
+   "query": "ssh: permission denied",
+   "relevant": {
+    "eval-ssh-keys": 2
+   }
+  },
+  {
+   "id": "pu-apostrophe",
+   "category": "punctuation",
+   "query": "what's self-attention",
+   "relevant": {
+    "eval-attention": 2
+   }
+  },
+  {
+   "id": "pu-flask-cors",
+   "category": "punctuation",
+   "query": "flask-cors",
+   "relevant": {
+    "eval-cors-flask": 2
+   }
+  },
+  {
+   "id": "md-sourdough",
+   "category": "metadata",
+   "query": "sourdough",
+   "relevant": {
+    "eval-sourdough": 2
+   }
+  },
+  {
+   "id": "md-best-man",
+   "category": "metadata",
+   "query": "best man speech",
+   "relevant": {
+    "eval-best-man": 2
+   }
+  },
+  {
+   "id": "md-japan",
+   "category": "metadata",
+   "query": "japan trip",
+   "relevant": {
+    "eval-trip-budget": 2,
+    "eval-kyoto": 1
+   }
+  },
+  {
+   "id": "md-kubernetes",
+   "category": "metadata",
+   "query": "kubernetes",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   }
+  },
+  {
+   "id": "md-houseplants",
+   "category": "metadata",
+   "query": "houseplants",
+   "relevant": {
+    "eval-monstera": 2
+   }
+  },
+  {
+   "id": "md-finance",
+   "category": "metadata",
+   "query": "personal finance",
+   "relevant": {
+    "eval-budget": 2,
+    "eval-mortgage": 2,
+    "eval-freelance-tax": 1
+   }
+  },
+  {
+   "id": "px-kube",
+   "category": "prefix",
+   "query": "kube",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   }
+  },
+  {
+   "id": "px-typescr",
+   "category": "prefix",
+   "query": "typescr",
+   "relevant": {
+    "eval-ts-generics": 2
+   }
+  },
+  {
+   "id": "px-mortg",
+   "category": "prefix",
+   "query": "mortg",
+   "relevant": {
+    "eval-mortgage": 2
+   }
+  },
+  {
+   "id": "px-docker-comp",
+   "category": "prefix",
+   "query": "docker comp",
+   "relevant": {
+    "eval-docker-network": 2
+   }
+  },
+  {
+   "id": "i18n-resume",
+   "category": "i18n",
+   "query": "resume feedback",
+   "relevant": {
+    "eval-resume": 2
+   }
+  },
+  {
+   "id": "i18n-pho",
+   "category": "i18n",
+   "query": "pho bo",
+   "relevant": {
+    "eval-pho": 2
+   }
+  },
+  {
+   "id": "i18n-vi",
+   "category": "i18n",
+   "query": "hoc tieng anh",
+   "relevant": {
+    "eval-vi-english": 2
+   }
+  },
+  {
+   "id": "i18n-ru",
+   "category": "i18n",
+   "query": "договор аренды",
+   "relevant": {
+    "eval-ru-lease": 2
+   }
+  },
+  {
+   "id": "i18n-ru-2",
+   "category": "i18n",
+   "query": "перевод договора",
+   "relevant": {
+    "eval-ru-lease": 2
+   }
+  },
+  {
+   "id": "hd-freeing-memory",
+   "category": "hard",
+   "query": "program crashes after freeing memory",
+   "relevant": {
+    "eval-cpp-segfault": 2
+   }
+  },
+  {
+   "id": "hd-save-money",
+   "category": "hard",
+   "query": "how much should I save each month",
+   "relevant": {
+    "eval-budget": 2
+   }
+  },
+  {
+   "id": "hd-home-loan",
+   "category": "hard",
+   "query": "home loan interest",
+   "relevant": {
+    "eval-mortgage": 2
+   }
+  },
+  {
+   "id": "hd-oom",
+   "category": "hard",
+   "query": "container killed out of memory",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   }
+  },
+  {
+   "id": "hd-rename-pictures",
+   "category": "hard",
+   "query": "rename pictures in the terminal",
+   "relevant": {
+    "eval-bash-rename": 2
+   }
+  },
+  {
+   "id": "hd-memorizing",
+   "category": "hard",
+   "query": "neural net memorizing the training data",
+   "relevant": {
+    "eval-overfit": 2
+   }
+  },
+  {
+   "id": "hd-standup",
+   "category": "hard",
+   "query": "standup notes",
+   "relevant": {
+    "eval-dev-journal": 2
+   }
+  },
+  {
+   "id": "hd-password-login",
+   "category": "hard",
+   "query": "stop typing my password when I log into the server",
+   "relevant": {
+    "eval-ssh-keys": 2
+   }
+  },
+  {
+   "id": "hd-japan-vacation",
+   "category": "hard",
+   "query": "how much money for a vacation in japan",
+   "relevant": {
+    "eval-trip-budget": 2,
+    "eval-kyoto": 1
+   }
+  },
+  {
+   "id": "hd-recover-commits",
+   "category": "hard",
+   "query": "recover commits I lost",
+   "relevant": {
+    "eval-git-rebase": 2
+   }
+  },
+  {
+   "id": "hd-lease-en",
+   "category": "hard",
+   "query": "lease agreement translation",
+   "relevant": {
+    "eval-ru-lease": 2
+   }
+  },
+  {
+   "id": "hd-vi-cross",
+   "category": "hard",
+   "query": "learn english with only 30 minutes a day",
+   "relevant": {
+    "eval-vi-english": 2
+   }
+  },
+  {
+   "id": "hd-vi-dj",
+   "category": "hard",
+   "query": "di lam buoi toi hoc tieng anh",
+   "relevant": {
+    "eval-vi-english": 2
+   }
+  },
+  {
+   "id": "hd-pho-diacritics",
+   "category": "hard",
+   "query": "phở",
+   "relevant": {
+    "eval-pho": 2
+   }
+  }
+ ]
+}

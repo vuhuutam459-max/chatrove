@@ -61,6 +61,8 @@ jobs:
           python processor/_test_librarian.py
           python processor/_test_serve_librarian.py
           python processor/_test_smart_api.py
+          python processor/_test_vault_search.py
+          python processor/search_eval/run_eval.py --compare processor/search_eval/baseline.json
 
       - name: Build app (one-dir)
         run: python build/build_windows.py

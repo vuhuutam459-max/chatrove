@@ -107,10 +107,13 @@ def _run() -> None:
     serve._librarian_log_path = str(DATA / ".librarian_log.txt")
     llm_gateway.CONFIG_PATH = DATA / "librarian_config.json"
 
-    # First-run seeding: create the DB, importing the bundled demo if present.
-    if not serve.DB_PATH.exists():
-        import parse_and_index as P
-        P.DB_PATH = serve.DB_PATH
+    import parse_and_index as P
+    P.DB_PATH = serve.DB_PATH
+    if serve.DB_PATH.exists():
+        # Existing vault: bring its schema / search index up to date.
+        P.init_db(serve.DB_PATH).close()
+    else:
+        # First-run seeding: create the DB, importing the bundled demo if present.
         conn = P.init_db(serve.DB_PATH)
         try:
             demo = RES / "Source_Accounts" / "demo_export.json"

@@ -49,6 +49,7 @@ _librarian_log_path = str(VIEWER_DIR.parent / ".librarian_log.txt")
 # client or provider, so AI is a clean optional plugin.
 sys.path.insert(0, str(VIEWER_DIR.parent / "processor"))
 from llm_gateway import build_gateway, LLMError, LLMUnavailable  # noqa: E402
+import vault_search  # noqa: E402
 
 
 def get_db() -> sqlite3.Connection:
@@ -268,13 +269,6 @@ class VaultHandler(SimpleHTTPRequestHandler):
 
     # ── Smart search: "ask the archive" (RAG-lite over FTS) ──
 
-    @staticmethod
-    def _fts_query(text: str) -> str:
-        """Build a safe FTS5 MATCH query: OR of quoted word tokens."""
-        import re
-        terms = re.findall(r"\w+", text, flags=re.UNICODE)
-        return " OR ".join(f'"{t}"' for t in terms)
-
     def _handle_ask(self):
         length = int(self.headers.get("Content-Length", 0))
         body = json.loads(self.rfile.read(length)) if length else {}
@@ -283,32 +277,22 @@ class VaultHandler(SimpleHTTPRequestHandler):
             self._json_response(400, {"error": "Empty question"})
             return
 
-        # 1) Retrieve candidate chats via FTS (phase-1 RAG-lite).
-        sources, seen = [], set()
-        fts_q = self._fts_query(question)
-        if fts_q:
-            conn = get_db()
-            try:
-                rows = conn.execute("""
-                    SELECT m.conversation_id AS id, c.title AS title,
-                           snippet(messages_fts, 0, '[', ']', '…', 18) AS snippet
-                    FROM messages_fts
-                    JOIN messages m ON messages_fts.rowid = m.id
-                    JOIN conversations c ON m.conversation_id = c.id
-                    WHERE messages_fts MATCH ?
-                    ORDER BY rank LIMIT 12
-                """, (fts_q,)).fetchall()
-            except sqlite3.OperationalError:
-                rows = []
-            finally:
-                conn.close()
-            for r in rows:
-                if r["id"] in seen:
-                    continue
-                seen.add(r["id"])
-                sources.append({"id": r["id"], "title": r["title"], "snippet": r["snippet"]})
-                if len(sources) >= 6:
-                    break
+        # 1) Retrieve candidate chats via ranked FTS (phase-1 RAG-lite).
+        sources = []
+        conn = get_db()
+        try:
+            for hit in vault_search.rank_conversations(conn, question, limit=6):
+                conv = conn.execute("SELECT title, summary FROM conversations WHERE id = ?",
+                                    (hit["id"],)).fetchone()
+                msg = vault_search.best_message(conn, hit["id"], hit["match"], "[", "]", 18)
+                # Title/summary-only hits: give the model the summary as the excerpt.
+                snippet = msg["snippet"] if msg else ((conv["summary"] or "") if conv else "")
+                sources.append({"id": hit["id"], "title": conv["title"] if conv else "",
+                                "snippet": snippet})
+        except sqlite3.OperationalError:
+            sources = []
+        finally:
+            conn.close()
 
         # 2) Ask the LLM to answer over the excerpts — opt-in, fail fast, degrade clearly.
         gateway = build_gateway()
@@ -520,19 +504,19 @@ class VaultHandler(SimpleHTTPRequestHandler):
         q = params.get("q", [None])[0]
 
         if q:
-            # Search via FTS5
-            rows = conn.execute("""
-                SELECT c.id, c.title, c.created_time, c.updated_time,
-                       c.message_count, c.canvas_count, c.source, c.summary, a.email
-                FROM conversations c
-                JOIN accounts a ON c.account_id = a.id
-                WHERE c.id IN (
-                    SELECT conversation_id FROM messages
-                    WHERE id IN (SELECT rowid FROM messages_fts WHERE messages_fts MATCH ?)
-                )
-                ORDER BY c.updated_time DESC
-                LIMIT ? OFFSET ?
-            """, (q, limit, offset)).fetchall()
+            ranked = vault_search.rank_conversations(conn, q, limit=limit + offset)
+            ids = [h["id"] for h in ranked][offset:]
+            by_id = {}
+            if ids:
+                qmarks = ",".join("?" * len(ids))
+                by_id = {r["id"]: r for r in conn.execute(f"""
+                    SELECT c.id, c.title, c.created_time, c.updated_time,
+                           c.message_count, c.canvas_count, c.source, c.summary, a.email
+                    FROM conversations c
+                    JOIN accounts a ON c.account_id = a.id
+                    WHERE c.id IN ({qmarks})
+                """, ids)}
+            rows = [by_id[i] for i in ids if i in by_id]
         elif account_id:
             rows = conn.execute("""
                 SELECT c.id, c.title, c.created_time, c.updated_time,
@@ -619,7 +603,8 @@ class VaultHandler(SimpleHTTPRequestHandler):
                 JOIN accounts a ON c.account_id = a.id
                 WHERE canvas_fts MATCH ?
                 ORDER BY rank LIMIT ?
-            """, (q, limit)).fetchall()
+            """, (vault_search.canvas_match(conn, q), limit)).fetchall() \
+                if vault_search.query_terms(q) else []
         else:
             rows = conn.execute("""
                 SELECT ca.id, ca.type, ca.conversation_id,
@@ -645,22 +630,24 @@ class VaultHandler(SimpleHTTPRequestHandler):
         results = []
 
         if scope in ("all", "messages"):
-            rows = conn.execute("""
-                SELECT m.conversation_id, m.role, m.content, m.seq,
-                       c.title, a.email,
-                       snippet(messages_fts, 0, '<mark>', '</mark>', '…', 40) as snippet
-                FROM messages_fts
-                JOIN messages m ON messages_fts.rowid = m.id
-                JOIN conversations c ON m.conversation_id = c.id
-                JOIN accounts a ON c.account_id = a.id
-                WHERE messages_fts MATCH ?
-                ORDER BY rank
-                LIMIT ?
-            """, (q, limit)).fetchall()
-            for r in rows:
-                results.append({
-                    "type": "message", **dict(r)
-                })
+            # One result per conversation, best conversation first, showing its
+            # best-matching message (or its title/summary for metadata-only hits).
+            for hit in vault_search.rank_conversations(conn, q, limit=limit):
+                conv = conn.execute("""
+                    SELECT c.title, c.summary, a.email FROM conversations c
+                    JOIN accounts a ON c.account_id = a.id WHERE c.id = ?
+                """, (hit["id"],)).fetchone()
+                if not conv:
+                    continue
+                msg = vault_search.best_message(conn, hit["id"], hit["match"])
+                if msg:
+                    results.append({"type": "message", **dict(msg),
+                                    "title": conv["title"], "email": conv["email"]})
+                else:
+                    results.append({"type": "conversation", "conversation_id": hit["id"],
+                                    "title": conv["title"], "email": conv["email"],
+                                    "content": conv["summary"] or conv["title"] or "",
+                                    "snippet": None})
 
         if scope in ("all", "canvas"):
             rows = conn.execute("""
@@ -674,7 +661,8 @@ class VaultHandler(SimpleHTTPRequestHandler):
                 WHERE canvas_fts MATCH ?
                 ORDER BY rank
                 LIMIT ?
-            """, (q, limit)).fetchall()
+            """, (vault_search.canvas_match(conn, q), limit)).fetchall() \
+                if vault_search.query_terms(q) else []
             for r in rows:
                 results.append({
                     "type": "canvas", **dict(r)
@@ -943,6 +931,11 @@ def main():
         print("      python processor/parse_and_index.py")
         print("      python processor/import_takeout.py /path/to/takeout.zip")
         sys.exit(1)
+
+    # Bring older vaults up to the current schema (e.g. rebuild the search
+    # index with the stemming tokenizer) before serving.
+    import parse_and_index
+    parse_and_index.init_db(DB_PATH).close()
 
     url = f"http://{args.host}:{args.port}/"
 

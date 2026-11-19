@@ -30,7 +30,7 @@ if _exists("Source_Accounts", "demo_export.json"):
 # explicitly to be safe (pathex also lets PyInstaller resolve them statically).
 hiddenimports = [
     "serve", "llm_gateway", "llm_client",
-    "parse_and_index", "librarian", "parsers", "importers",
+    "parse_and_index", "librarian", "parsers", "importers", "vault_search",
 ]
 
 a = Analysis(
