@@ -72,7 +72,9 @@ def _spellings(term: str) -> list[str]:
     base = fold_d(term)
     if " " in base or not base.startswith("d"):
         return [term]
-    return list(dict.fromkeys([base, "đ" + base[1:]]))
+    # Keep the term as typed too: "điđâu" folds to "didâu"/"đidâu", neither of
+    # which matches the stored hashtag.
+    return list(dict.fromkeys([term, base, "đ" + base[1:]]))
 
 
 def _term_expr(term: str, prefix: bool) -> str:
