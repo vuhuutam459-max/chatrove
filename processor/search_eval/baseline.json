@@ -1,0 +1,2560 @@
+{
+ "summary": {
+  "search": {
+   "ALL": {
+    "hit@1": 0.208955223880597,
+    "R@5": 0.21641791044776118,
+    "MRR": 0.22388059701492538,
+    "nDCG@10": 0.2182528692256577,
+    "zero": 0.7761194029850746,
+    "error": 0.13432835820895522,
+    "n": 67
+   },
+   "keyword": {
+    "hit@1": 0.8571428571428571,
+    "R@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@10": 0.9709582258557867,
+    "zero": 0.0,
+    "error": 0.0,
+    "n": 7
+   },
+   "natural": {
+    "hit@1": 0.29411764705882354,
+    "R@5": 0.2647058823529412,
+    "MRR": 0.29411764705882354,
+    "nDCG@10": 0.28389615630167997,
+    "zero": 0.7058823529411765,
+    "error": 0.058823529411764705,
+    "n": 17
+   },
+   "morphology": {
+    "hit@1": 0.0,
+    "R@5": 0.0,
+    "MRR": 0.0,
+    "nDCG@10": 0.0,
+    "zero": 1.0,
+    "error": 0.0,
+    "n": 6
+   },
+   "punctuation": {
+    "hit@1": 0.0,
+    "R@5": 0.0,
+    "MRR": 0.0,
+    "nDCG@10": 0.0,
+    "zero": 1.0,
+    "error": 1.0,
+    "n": 8
+   },
+   "metadata": {
+    "hit@1": 0.0,
+    "R@5": 0.0,
+    "MRR": 0.0,
+    "nDCG@10": 0.0,
+    "zero": 1.0,
+    "error": 0.0,
+    "n": 6
+   },
+   "prefix": {
+    "hit@1": 0.0,
+    "R@5": 0.0,
+    "MRR": 0.0,
+    "nDCG@10": 0.0,
+    "zero": 1.0,
+    "error": 0.0,
+    "n": 4
+   },
+   "i18n": {
+    "hit@1": 0.4,
+    "R@5": 0.4,
+    "MRR": 0.4,
+    "nDCG@10": 0.4,
+    "zero": 0.6,
+    "error": 0.0,
+    "n": 5
+   },
+   "hard": {
+    "hit@1": 0.07142857142857142,
+    "R@5": 0.07142857142857142,
+    "MRR": 0.07142857142857142,
+    "nDCG@10": 0.07142857142857142,
+    "zero": 0.9285714285714286,
+    "error": 0.0,
+    "n": 14
+   }
+  },
+  "ask": {
+   "ALL": {
+    "hit@1": 0.6417910447761194,
+    "R@5": 0.7835820895522388,
+    "MRR": 0.7338308457711443,
+    "nDCG@10": 0.7334030855201258,
+    "zero": 0.16417910447761194,
+    "error": 0.0,
+    "n": 67
+   },
+   "keyword": {
+    "hit@1": 0.8571428571428571,
+    "R@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@10": 0.9709582258557867,
+    "zero": 0.0,
+    "error": 0.0,
+    "n": 7
+   },
+   "natural": {
+    "hit@1": 0.7647058823529411,
+    "R@5": 0.9705882352941176,
+    "MRR": 0.872549019607843,
+    "nDCG@10": 0.8950549367686673,
+    "zero": 0.0,
+    "error": 0.0,
+    "n": 17
+   },
+   "morphology": {
+    "hit@1": 0.6666666666666666,
+    "R@5": 0.6666666666666666,
+    "MRR": 0.6666666666666666,
+    "nDCG@10": 0.6666666666666666,
+    "zero": 0.3333333333333333,
+    "error": 0.0,
+    "n": 6
+   },
+   "punctuation": {
+    "hit@1": 1.0,
+    "R@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@10": 1.0,
+    "zero": 0.0,
+    "error": 0.0,
+    "n": 8
+   },
+   "metadata": {
+    "hit@1": 0.0,
+    "R@5": 0.08333333333333333,
+    "MRR": 0.16666666666666666,
+    "nDCG@10": 0.04590192539603111,
+    "zero": 0.8333333333333334,
+    "error": 0.0,
+    "n": 6
+   },
+   "prefix": {
+    "hit@1": 0.0,
+    "R@5": 0.25,
+    "MRR": 0.125,
+    "nDCG@10": 0.15773243839286435,
+    "zero": 0.75,
+    "error": 0.0,
+    "n": 4
+   },
+   "i18n": {
+    "hit@1": 1.0,
+    "R@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@10": 1.0,
+    "zero": 0.0,
+    "error": 0.0,
+    "n": 5
+   },
+   "hard": {
+    "hit@1": 0.5,
+    "R@5": 0.75,
+    "MRR": 0.6309523809523808,
+    "nDCG@10": 0.6585017084173523,
+    "zero": 0.07142857142857142,
+    "error": 0.0,
+    "n": 14
+   }
+  }
+ },
+ "queries": [
+  {
+   "id": "kw-asyncio",
+   "category": "keyword",
+   "query": "asyncio",
+   "relevant": {
+    "eval-py-asyncio": 2,
+    "eval-py-timeout": 1
+   },
+   "ranked": {
+    "search": [
+     "eval-py-timeout",
+     "eval-py-asyncio"
+    ],
+    "ask": [
+     "eval-py-timeout",
+     "eval-py-asyncio"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 0.7967075809905066,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 0.7967075809905066,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "kw-crashloop",
+   "category": "keyword",
+   "query": "CrashLoopBackOff",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-k8s-crashloop"
+    ],
+    "ask": [
+     "eval-k8s-crashloop"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "kw-vlookup",
+   "category": "keyword",
+   "query": "VLOOKUP",
+   "relevant": {
+    "eval-excel-lookup": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-excel-lookup"
+    ],
+    "ask": [
+     "eval-excel-lookup"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "kw-valgrind",
+   "category": "keyword",
+   "query": "valgrind",
+   "relevant": {
+    "eval-cpp-segfault": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-cpp-segfault"
+    ],
+    "ask": [
+     "eval-cpp-segfault"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "kw-reflog",
+   "category": "keyword",
+   "query": "git reflog",
+   "relevant": {
+    "eval-git-rebase": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-git-rebase"
+    ],
+    "ask": [
+     "eval-git-rebase",
+     "eval-dev-journal",
+     "eval-git-secret",
+     "eval-docker-size"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "kw-pyproject",
+   "category": "keyword",
+   "query": "twine pypi",
+   "relevant": {
+    "eval-py-pypi": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-py-pypi"
+    ],
+    "ask": [
+     "eval-py-pypi"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "kw-ryokan",
+   "category": "keyword",
+   "query": "ryokan",
+   "relevant": {
+    "eval-kyoto": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-kyoto"
+    ],
+    "ask": [
+     "eval-kyoto"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-cancel-coroutine",
+   "category": "natural",
+   "query": "how do I cancel a coroutine that takes too long",
+   "relevant": {
+    "eval-py-timeout": 2,
+    "eval-py-asyncio": 1
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-ts-generics",
+     "eval-py-timeout",
+     "eval-docker-size",
+     "eval-marathon",
+     "eval-bash-rename",
+     "eval-salary"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.5,
+     "MRR": 0.5,
+     "nDCG@10": 0.52129602861432,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-containers-talk",
+   "category": "natural",
+   "query": "containers can't connect to each other",
+   "relevant": {
+    "eval-docker-network": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-docker-network",
+     "eval-ts-generics",
+     "eval-py-pypi",
+     "eval-mortgage",
+     "eval-resume",
+     "eval-excel-lookup"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"fts5: syntax error near \\\"'\\\"\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-docker-smaller",
+   "category": "natural",
+   "query": "make my docker image smaller",
+   "relevant": {
+    "eval-docker-size": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-docker-size",
+     "eval-docker-network",
+     "eval-dev-journal",
+     "eval-overfit",
+     "eval-cat",
+     "eval-monstera"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-pod-restart",
+   "category": "natural",
+   "query": "pod keeps restarting",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-k8s-crashloop"
+    ],
+    "ask": [
+     "eval-k8s-crashloop"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-502",
+   "category": "natural",
+   "query": "nginx 502 bad gateway",
+   "relevant": {
+    "eval-nginx-proxy": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-nginx-proxy"
+    ],
+    "ask": [
+     "eval-nginx-proxy"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-cors",
+   "category": "natural",
+   "query": "fetch blocked by CORS policy",
+   "relevant": {
+    "eval-cors-flask": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-cors-flask"
+    ],
+    "ask": [
+     "eval-cors-flask",
+     "eval-py-asyncio",
+     "eval-react-effect",
+     "eval-sql-index",
+     "eval-regex-email",
+     "eval-marathon"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-undo-rebase",
+   "category": "natural",
+   "query": "undo a rebase that went wrong",
+   "relevant": {
+    "eval-git-rebase": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-git-rebase",
+     "eval-ts-generics",
+     "eval-regex-email",
+     "eval-nginx-proxy",
+     "eval-k8s-crashloop",
+     "eval-cpp-segfault"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-api-key-github",
+   "category": "natural",
+   "query": "accidentally pushed my api key to github",
+   "relevant": {
+    "eval-git-secret": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-git-secret",
+     "eval-py-timeout",
+     "eval-ssh-keys",
+     "eval-cors-flask",
+     "eval-ts-generics",
+     "eval-docker-network"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-slow-postgres",
+   "category": "natural",
+   "query": "slow postgres query",
+   "relevant": {
+    "eval-sql-index": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-sqlite-fts",
+     "eval-attention",
+     "eval-sql-index",
+     "eval-cat",
+     "eval-docker-network"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.3333333333333333,
+     "nDCG@10": 0.5,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-kyoto",
+   "category": "natural",
+   "query": "what should we see in Kyoto",
+   "relevant": {
+    "eval-kyoto": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-marathon",
+     "eval-kyoto",
+     "eval-mortgage",
+     "eval-py-venv",
+     "eval-trip-budget",
+     "eval-ssh-keys"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.5,
+     "nDCG@10": 0.6309297535714574,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-bread",
+   "category": "natural",
+   "query": "bread came out dense",
+   "relevant": {
+    "eval-sourdough": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-sourdough",
+     "eval-dev-journal",
+     "eval-git-secret",
+     "eval-monstera",
+     "eval-best-man"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-knee",
+   "category": "natural",
+   "query": "knee hurts after running",
+   "relevant": {
+    "eval-knee": 2,
+    "eval-marathon": 1
+   },
+   "ranked": {
+    "search": [
+     "eval-knee"
+    ],
+    "ask": [
+     "eval-knee",
+     "eval-k8s-crashloop",
+     "eval-cpp-segfault",
+     "eval-cat",
+     "eval-marathon",
+     "eval-overfit"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 0.5,
+     "MRR": 1.0,
+     "nDCG@10": 0.8262346571285599,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 0.9327783893101107,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-ask-raise",
+   "category": "natural",
+   "query": "how to ask for a higher salary",
+   "relevant": {
+    "eval-salary": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-salary",
+     "eval-docker-size",
+     "eval-py-timeout",
+     "eval-trip-budget",
+     "eval-bash-rename",
+     "eval-attention"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-cat",
+   "category": "natural",
+   "query": "what did the vet advice say about my cat vomiting",
+   "relevant": {
+    "eval-cat": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-py-venv",
+     "eval-cat",
+     "eval-marathon",
+     "eval-knee",
+     "eval-git-rebase",
+     "eval-salary"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.5,
+     "nDCG@10": 0.6309297535714574,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-react-twice",
+   "category": "natural",
+   "query": "why does useEffect run twice",
+   "relevant": {
+    "eval-react-effect": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-react-effect",
+     "eval-py-timeout",
+     "eval-attention",
+     "eval-py-asyncio",
+     "eval-marathon",
+     "eval-cpp-segfault"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-pip-error",
+   "category": "natural",
+   "query": "pip install externally managed environment error",
+   "relevant": {
+    "eval-py-venv": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-py-venv"
+    ],
+    "ask": [
+     "eval-py-venv",
+     "eval-py-pypi",
+     "eval-nginx-proxy",
+     "eval-cors-flask"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "nl-taxes",
+   "category": "natural",
+   "query": "do freelancers pay taxes every quarter",
+   "relevant": {
+    "eval-freelance-tax": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-freelance-tax",
+     "eval-k8s-crashloop",
+     "eval-budget",
+     "eval-marathon",
+     "eval-ru-lease",
+     "eval-cors-flask"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "mo-restarting-pods",
+   "category": "morphology",
+   "query": "restarting pods",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-k8s-crashloop"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "mo-overfitting",
+   "category": "morphology",
+   "query": "overfitting",
+   "relevant": {
+    "eval-overfit": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "mo-negotiate",
+   "category": "morphology",
+   "query": "negotiate offer",
+   "relevant": {
+    "eval-salary": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-salary"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "mo-tapering",
+   "category": "morphology",
+   "query": "tapering weeks",
+   "relevant": {
+    "eval-marathon": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-marathon",
+     "eval-knee"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "mo-yellow-leaves",
+   "category": "morphology",
+   "query": "yellowing leaf",
+   "relevant": {
+    "eval-monstera": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "mo-renaming",
+   "category": "morphology",
+   "query": "renaming photos",
+   "relevant": {
+    "eval-bash-rename": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-bash-rename"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-cpp",
+   "category": "punctuation",
+   "query": "C++ segmentation fault",
+   "relevant": {
+    "eval-cpp-segfault": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-cpp-segfault",
+     "eval-sourdough"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"fts5: syntax error near \\\"+\\\"\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-nodejs",
+   "category": "punctuation",
+   "query": "node.js require is not defined",
+   "relevant": {
+    "eval-node-esm": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-node-esm",
+     "eval-cpp-segfault",
+     "eval-docker-size",
+     "eval-nginx-proxy",
+     "eval-ssh-keys",
+     "eval-react-effect"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"fts5: syntax error near \\\".\\\"\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-email",
+   "category": "punctuation",
+   "query": "e-mail regex",
+   "relevant": {
+    "eval-regex-email": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-regex-email"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"no such column: mail\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-na",
+   "category": "punctuation",
+   "query": "#N/A error",
+   "relevant": {
+    "eval-excel-lookup": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-excel-lookup",
+     "eval-py-venv",
+     "eval-bash-rename",
+     "eval-nginx-proxy",
+     "eval-regex-email",
+     "eval-cover-letter"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"fts5: syntax error near \\\"#\\\"\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-pyproject",
+   "category": "punctuation",
+   "query": "pyproject.toml",
+   "relevant": {
+    "eval-py-pypi": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-py-pypi"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"fts5: syntax error near \\\".\\\"\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-ssh-colon",
+   "category": "punctuation",
+   "query": "ssh: permission denied",
+   "relevant": {
+    "eval-ssh-keys": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-ssh-keys"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"no such column: ssh\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-apostrophe",
+   "category": "punctuation",
+   "query": "what's self-attention",
+   "relevant": {
+    "eval-attention": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-attention",
+     "eval-marathon",
+     "eval-py-venv",
+     "eval-freelance-tax",
+     "eval-k8s-crashloop",
+     "eval-dev-journal"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"fts5: syntax error near \\\"'\\\"\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "pu-flask-cors",
+   "category": "punctuation",
+   "query": "flask-cors",
+   "relevant": {
+    "eval-cors-flask": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-cors-flask"
+    ]
+   },
+   "errors": {
+    "search": "HTTP 500: {\"error\": \"no such column: cors\"}"
+   },
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 1.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "md-sourdough",
+   "category": "metadata",
+   "query": "sourdough",
+   "relevant": {
+    "eval-sourdough": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "md-best-man",
+   "category": "metadata",
+   "query": "best man speech",
+   "relevant": {
+    "eval-best-man": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "md-japan",
+   "category": "metadata",
+   "query": "japan trip",
+   "relevant": {
+    "eval-trip-budget": 2,
+    "eval-kyoto": 1
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-kyoto"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.5,
+     "MRR": 1.0,
+     "nDCG@10": 0.27541155237618664,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "md-kubernetes",
+   "category": "metadata",
+   "query": "kubernetes",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "md-houseplants",
+   "category": "metadata",
+   "query": "houseplants",
+   "relevant": {
+    "eval-monstera": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "md-finance",
+   "category": "metadata",
+   "query": "personal finance",
+   "relevant": {
+    "eval-budget": 2,
+    "eval-mortgage": 2,
+    "eval-freelance-tax": 1
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "px-kube",
+   "category": "prefix",
+   "query": "kube",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "px-typescr",
+   "category": "prefix",
+   "query": "typescr",
+   "relevant": {
+    "eval-ts-generics": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "px-mortg",
+   "category": "prefix",
+   "query": "mortg",
+   "relevant": {
+    "eval-mortgage": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "px-docker-comp",
+   "category": "prefix",
+   "query": "docker comp",
+   "relevant": {
+    "eval-docker-network": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-dev-journal",
+     "eval-docker-network"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.5,
+     "nDCG@10": 0.6309297535714574,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "i18n-resume",
+   "category": "i18n",
+   "query": "resume feedback",
+   "relevant": {
+    "eval-resume": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-resume"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "i18n-pho",
+   "category": "i18n",
+   "query": "pho bo",
+   "relevant": {
+    "eval-pho": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-pho"
+    ],
+    "ask": [
+     "eval-pho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "i18n-vi",
+   "category": "i18n",
+   "query": "hoc tieng anh",
+   "relevant": {
+    "eval-vi-english": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-english"
+    ],
+    "ask": [
+     "eval-vi-english",
+     "eval-pho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "i18n-ru",
+   "category": "i18n",
+   "query": "договор аренды",
+   "relevant": {
+    "eval-ru-lease": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-ru-lease"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "i18n-ru-2",
+   "category": "i18n",
+   "query": "перевод договора",
+   "relevant": {
+    "eval-ru-lease": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-ru-lease"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-freeing-memory",
+   "category": "hard",
+   "query": "program crashes after freeing memory",
+   "relevant": {
+    "eval-cpp-segfault": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-cpp-segfault",
+     "eval-k8s-crashloop",
+     "eval-cat",
+     "eval-marathon",
+     "eval-overfit",
+     "eval-knee"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-save-money",
+   "category": "hard",
+   "query": "how much should I save each month",
+   "relevant": {
+    "eval-budget": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-trip-budget",
+     "eval-ru-lease",
+     "eval-py-venv",
+     "eval-marathon",
+     "eval-py-asyncio",
+     "eval-cpp-segfault"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-home-loan",
+   "category": "hard",
+   "query": "home loan interest",
+   "relevant": {
+    "eval-mortgage": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-budget",
+     "eval-mortgage",
+     "eval-freelance-tax"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.5,
+     "nDCG@10": 0.6309297535714574,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-oom",
+   "category": "hard",
+   "query": "container killed out of memory",
+   "relevant": {
+    "eval-k8s-crashloop": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-dev-journal",
+     "eval-k8s-crashloop",
+     "eval-docker-network",
+     "eval-monstera",
+     "eval-sourdough",
+     "eval-git-secret"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.5,
+     "nDCG@10": 0.6309297535714574,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-rename-pictures",
+   "category": "hard",
+   "query": "rename pictures in the terminal",
+   "relevant": {
+    "eval-bash-rename": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-bash-rename",
+     "eval-node-esm",
+     "eval-kyoto",
+     "eval-cpp-segfault",
+     "eval-pho",
+     "eval-attention"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-memorizing",
+   "category": "hard",
+   "query": "neural net memorizing the training data",
+   "relevant": {
+    "eval-overfit": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-overfit",
+     "eval-react-effect",
+     "eval-cover-letter",
+     "eval-salary",
+     "eval-linreg",
+     "eval-k8s-crashloop"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-standup",
+   "category": "hard",
+   "query": "standup notes",
+   "relevant": {
+    "eval-dev-journal": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-sqlite-fts",
+     "eval-dev-journal"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.5,
+     "nDCG@10": 0.6309297535714574,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-password-login",
+   "category": "hard",
+   "query": "stop typing my password when I log into the server",
+   "relevant": {
+    "eval-ssh-keys": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-nginx-proxy",
+     "eval-cpp-segfault",
+     "eval-ssh-keys",
+     "eval-react-effect",
+     "eval-cors-flask",
+     "eval-py-venv"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 1.0,
+     "MRR": 0.3333333333333333,
+     "nDCG@10": 0.5,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-japan-vacation",
+   "category": "hard",
+   "query": "how much money for a vacation in japan",
+   "relevant": {
+    "eval-trip-budget": 2,
+    "eval-kyoto": 1
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-trip-budget",
+     "eval-linreg",
+     "eval-attention",
+     "eval-docker-size",
+     "eval-salary",
+     "eval-py-asyncio"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 0.5,
+     "MRR": 1.0,
+     "nDCG@10": 0.8262346571285599,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-recover-commits",
+   "category": "hard",
+   "query": "recover commits I lost",
+   "relevant": {
+    "eval-git-rebase": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-git-rebase",
+     "eval-git-secret",
+     "eval-py-pypi",
+     "eval-nginx-proxy",
+     "eval-freelance-tax",
+     "eval-best-man"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-lease-en",
+   "category": "hard",
+   "query": "lease agreement translation",
+   "relevant": {
+    "eval-ru-lease": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": []
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-vi-cross",
+   "category": "hard",
+   "query": "learn english with only 30 minutes a day",
+   "relevant": {
+    "eval-vi-english": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-kyoto",
+     "eval-budget",
+     "eval-trip-budget",
+     "eval-marathon",
+     "eval-sourdough",
+     "eval-pho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-vi-dj",
+   "category": "hard",
+   "query": "di lam buoi toi hoc tieng anh",
+   "relevant": {
+    "eval-vi-english": 2
+   },
+   "ranked": {
+    "search": [],
+    "ask": [
+     "eval-vi-english",
+     "eval-pho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 0.0,
+     "R@5": 0.0,
+     "MRR": 0.0,
+     "nDCG@10": 0.0,
+     "zero": 1.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "hd-pho-diacritics",
+   "category": "hard",
+   "query": "phở",
+   "relevant": {
+    "eval-pho": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-pho"
+    ],
+    "ask": [
+     "eval-pho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  }
+ ]
+}

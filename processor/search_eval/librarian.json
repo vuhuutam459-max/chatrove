@@ -1,0 +1,11 @@
+{
+  "_note": "Simulated Smart Librarian output (summary + tags) for a subset of the corpus, applied after import.",
+  "eval-k8s-crashloop": {"summary": "Debugging a Kubernetes pod stuck in CrashLoopBackOff, which turned out to be OOMKilled.", "tags": ["kubernetes", "devops"]},
+  "eval-overfit": {"summary": "Diagnosing overfitting in a neural network and fixing it with regularization and early stopping.", "tags": ["machine-learning"]},
+  "eval-monstera": {"summary": "Overwatering and root rot as causes of yellow monstera leaves.", "tags": ["houseplants"]},
+  "eval-cat": {"summary": "Why a cat vomits after meals and when to see the vet.", "tags": ["pets"]},
+  "eval-git-secret": {"summary": "Rotating a leaked OpenAI key and purging .env from git history.", "tags": ["git", "security"]},
+  "eval-budget": {"summary": "Monthly household budget using the 50/30/20 rule.", "tags": ["personal-finance"]},
+  "eval-mortgage": {"summary": "Choosing between a fixed and variable mortgage for a first home.", "tags": ["personal-finance"]},
+  "eval-dev-journal": {"summary": "Standup summary of a week of development work.", "tags": ["work"]}
+}

@@ -101,14 +101,14 @@ CREATE VIRTUAL TABLE IF NOT EXISTS messages_fts USING fts5(
     content,
     content=messages,
     content_rowid=id,
-    tokenize='unicode61 remove_diacritics 2'
+    tokenize='porter unicode61 remove_diacritics 2'
 );
 
 CREATE VIRTUAL TABLE IF NOT EXISTS canvas_fts USING fts5(
     content,
     content=canvas_artifacts,
     content_rowid=rowid,
-    tokenize='unicode61 remove_diacritics 2'
+    tokenize='porter unicode61 remove_diacritics 2'
 );
 
 -- Triggers to keep FTS in sync
@@ -134,6 +134,50 @@ CREATE TRIGGER IF NOT EXISTS canvas_ad AFTER DELETE ON canvas_artifacts BEGIN
 END;
 """
 
+# Title + Librarian summary index. Created after the column migrations in
+# init_db (it references conversations.summary, which old vaults lack).
+CONVERSATIONS_FTS_SQL = """
+CREATE VIRTUAL TABLE IF NOT EXISTS conversations_fts USING fts5(
+    title,
+    summary,
+    content=conversations,
+    content_rowid=rowid,
+    tokenize='porter unicode61 remove_diacritics 2'
+);
+CREATE TRIGGER IF NOT EXISTS conversations_ai AFTER INSERT ON conversations BEGIN
+    INSERT INTO conversations_fts(rowid, title, summary)
+        VALUES (new.rowid, new.title, new.summary);
+END;
+CREATE TRIGGER IF NOT EXISTS conversations_ad AFTER DELETE ON conversations BEGIN
+    INSERT INTO conversations_fts(conversations_fts, rowid, title, summary)
+        VALUES ('delete', old.rowid, old.title, old.summary);
+END;
+CREATE TRIGGER IF NOT EXISTS conversations_au AFTER UPDATE OF title, summary ON conversations BEGIN
+    INSERT INTO conversations_fts(conversations_fts, rowid, title, summary)
+        VALUES ('delete', old.rowid, old.title, old.summary);
+    INSERT INTO conversations_fts(rowid, title, summary)
+        VALUES (new.rowid, new.title, new.summary);
+END;
+"""
+
+SEARCH_TOKENIZER = "porter unicode61 remove_diacritics 2"
+
+
+def _migrate_search_index(conn: sqlite3.Connection) -> list[str]:
+    """Drop FTS tables built with an older tokenizer; returns the ones to rebuild.
+
+    The external-content tables hold no data of their own, so dropping and
+    rebuilding them from messages/canvas_artifacts is lossless.
+    """
+    stale = []
+    for name in ("messages_fts", "canvas_fts"):
+        row = conn.execute("SELECT sql FROM sqlite_master WHERE name = ?", (name,)).fetchone()
+        if row and SEARCH_TOKENIZER not in row[0]:
+            conn.execute(f"DROP TABLE {name}")
+            stale.append(name)
+    return stale
+
+
 # ── Utilities ──
 
 def sha256_of(text: str) -> str:
@@ -154,6 +198,7 @@ def init_db(db_path: Path) -> sqlite3.Connection:
     conn = sqlite3.connect(str(db_path))
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA foreign_keys=ON")
+    rebuild = _migrate_search_index(conn)
     conn.executescript(SCHEMA_SQL)
     # Backward-compat migration: add 'source' to databases created before
     # multi-source support (CREATE TABLE IF NOT EXISTS won't add columns).
@@ -170,6 +215,11 @@ def init_db(db_path: Path) -> sqlite3.Connection:
     ):
         if col not in cols:
             conn.execute(f"ALTER TABLE conversations ADD COLUMN {col} {decl}")
+    if not conn.execute("SELECT 1 FROM sqlite_master WHERE name = 'conversations_fts'").fetchone():
+        rebuild.append("conversations_fts")
+    conn.executescript(CONVERSATIONS_FTS_SQL)
+    for name in rebuild:
+        conn.execute(f"INSERT INTO {name}({name}) VALUES ('rebuild')")
     conn.commit()
     return conn
 

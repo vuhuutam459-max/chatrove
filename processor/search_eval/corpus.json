@@ -1,0 +1,257 @@
+{
+  "export_metadata": {
+    "version": "1.0.0",
+    "export_date": "2026-11-01T00:00:00Z",
+    "account_email": "search-eval@example.com",
+    "source": "search_eval_synthetic",
+    "note": "Synthetic chats written for the search-quality benchmark. No real user data."
+  },
+  "conversations": [
+    {"id": "eval-py-asyncio", "title": "Python asyncio basics", "source": "gemini", "created_time": 1735700000000, "updated_time": 1735700600000,
+     "messages": [
+      {"role": "user", "content": "Can you explain how async and await work in Python? I keep seeing asyncio.run everywhere."},
+      {"role": "model", "content": "asyncio gives you a single-threaded event loop. An `async def` function returns a coroutine; `await` suspends it until the awaited coroutine finishes, letting the loop run other tasks meanwhile. Use `asyncio.gather()` to run several coroutines concurrently and `asyncio.run(main())` as the entry point."},
+      {"role": "user", "content": "So gather is how I fetch ten URLs at once?"},
+      {"role": "model", "content": "Exactly. Create the coroutines in a list and `await asyncio.gather(*coros)`. With aiohttp this is far faster than requests in a loop because the network waits overlap."}
+     ]},
+    {"id": "eval-py-timeout", "title": "Stopping slow tasks", "source": "chatgpt", "created_time": 1736000000000, "updated_time": 1736000500000,
+     "messages": [
+      {"role": "user", "content": "One of my coroutines sometimes hangs forever talking to a flaky API. How do I give up after 5 seconds?"},
+      {"role": "model", "content": "Wrap it with `asyncio.wait_for(coro, timeout=5)`. If it takes too long, the task is cancelled and `asyncio.TimeoutError` is raised, which you can catch. In Python 3.11+ you can also use `async with asyncio.timeout(5):`."},
+      {"role": "user", "content": "Does cancelling clean up the connection?"},
+      {"role": "model", "content": "Cancellation raises CancelledError inside the coroutine, so `finally:` blocks and `async with` context managers still run and close the connection."}
+     ]},
+    {"id": "eval-py-pypi", "title": "Publishing my first library", "source": "claude", "created_time": 1736300000000, "updated_time": 1736300900000,
+     "messages": [
+      {"role": "user", "content": "I wrote a small utility and want other people to `pip install` it. Where do I start?"},
+      {"role": "model", "content": "Add a pyproject.toml with a [build-system] table (hatchling or setuptools) and a [project] table with name, version and dependencies. Run `python -m build` to create the sdist and wheel in dist/, then `twine upload dist/*` to publish to PyPI. Try TestPyPI first."},
+      {"role": "user", "content": "twine says the name is already taken"},
+      {"role": "model", "content": "Package names on PyPI are global. Pick a different `name` in pyproject.toml; the import name can stay the same."}
+     ]},
+    {"id": "eval-py-venv", "title": "pip install error on Ubuntu", "source": "gemini", "created_time": 1736600000000, "updated_time": 1736600300000,
+     "messages": [
+      {"role": "user", "content": "pip install fails with error: externally-managed-environment. What did I break?"},
+      {"role": "model", "content": "Nothing is broken. Newer Debian/Ubuntu mark the system Python as externally managed (PEP 668). Create a virtual environment: `python3 -m venv .venv`, then `source .venv/bin/activate` and pip install inside it. pipx is good for command-line tools."},
+      {"role": "user", "content": "Should I use conda instead of venv?"},
+      {"role": "model", "content": "Conda is useful when you need non-Python binaries like CUDA or GDAL. For plain Python projects venv is lighter and standard."}
+     ]},
+    {"id": "eval-docker-network", "title": "Compose services networking", "source": "chatgpt", "created_time": 1736900000000, "updated_time": 1736900800000,
+     "messages": [
+      {"role": "user", "content": "My web container can't connect to the database container. Connection refused on localhost:5432."},
+      {"role": "model", "content": "Inside a container, localhost is the container itself. With docker-compose every service joins a default bridge network and is reachable by its service name, so use `host=db` (the service name) instead of localhost. Also make sure Postgres listens on 0.0.0.0."},
+      {"role": "user", "content": "It works now with db:5432. Do I still need the ports: mapping?"},
+      {"role": "model", "content": "Only if you want to reach the database from your host machine. Containers on the same network talk to each other without published ports."}
+     ]},
+    {"id": "eval-docker-size", "title": "Image is 1.8 GB", "source": "gemini", "created_time": 1737200000000, "updated_time": 1737200400000,
+     "messages": [
+      {"role": "user", "content": "My Dockerfile for a Node app produces a 1.8 GB image. How do I shrink it?"},
+      {"role": "model", "content": "Use a multi-stage build: compile in a `node:20` builder stage, then copy only the built output and production node_modules into `node:20-slim` or alpine. Add a .dockerignore for node_modules and .git, and run `npm ci --omit=dev`."},
+      {"role": "user", "content": "Got it down to 180 MB, thanks!"}
+     ]},
+    {"id": "eval-k8s-crashloop", "title": "CrashLoopBackOff on deploy", "source": "claude", "created_time": 1737500000000, "updated_time": 1737500700000,
+     "messages": [
+      {"role": "user", "content": "After deploying, my pod keeps restarting every minute."},
+      {"role": "model", "content": "That is CrashLoopBackOff. Check `kubectl describe pod <name>` for the last state and exit code, and `kubectl logs <pod> --previous` for the crashed container's output. Common causes: a missing env var or secret, the app exiting immediately, or a liveness probe that fails before the app is ready."},
+      {"role": "user", "content": "Exit code 137"},
+      {"role": "model", "content": "137 means it was OOMKilled. Raise the memory limit in the Deployment's resources or fix the memory usage. Add a startupProbe if the app needs longer to boot."}
+     ]},
+    {"id": "eval-nginx-proxy", "title": "Reverse proxy for Express", "source": "gemini", "created_time": 1737800000000, "updated_time": 1737800500000,
+     "messages": [
+      {"role": "user", "content": "I put nginx in front of my Express server and now I just get 502 Bad Gateway."},
+      {"role": "model", "content": "A 502 means nginx could not reach the upstream. Check that `proxy_pass http://127.0.0.1:3000;` matches the port Express listens on, that the app is running, and read /var/log/nginx/error.log for 'connect() failed'."},
+      {"role": "user", "content": "Socket.io connections also drop."},
+      {"role": "model", "content": "For WebSockets add `proxy_http_version 1.1;`, `proxy_set_header Upgrade $http_upgrade;` and `proxy_set_header Connection \"upgrade\";` to the location block."}
+     ]},
+    {"id": "eval-cors-flask", "title": "Frontend can't call my API", "source": "chatgpt", "created_time": 1738100000000, "updated_time": 1738100400000,
+     "messages": [
+      {"role": "user", "content": "The browser console says: Access to fetch at 'http://localhost:5000/api' from origin 'http://localhost:5173' has been blocked by CORS policy."},
+      {"role": "model", "content": "Your Flask backend must send the Access-Control-Allow-Origin header. Install flask-cors and call `CORS(app, origins=[\"http://localhost:5173\"])`. Alternatively configure the Vite dev server proxy so the request is same-origin."},
+      {"role": "user", "content": "Do I need credentials: true for cookies?"},
+      {"role": "model", "content": "Yes: `supports_credentials=True` on the server and `credentials: 'include'` in fetch, and the origin cannot be a wildcard."}
+     ]},
+    {"id": "eval-node-esm", "title": "ReferenceError in Node", "source": "gemini", "created_time": 1738400000000, "updated_time": 1738400300000,
+     "messages": [
+      {"role": "user", "content": "Node.js throws ReferenceError: require is not defined in ES module scope."},
+      {"role": "model", "content": "Your package.json has \"type\": \"module\", so .js files are ES modules. Replace `const x = require('x')` with `import x from 'x'`, or rename the file to .cjs. For __dirname use `path.dirname(fileURLToPath(import.meta.url))`."}
+     ]},
+    {"id": "eval-cpp-segfault", "title": "Linked list crash", "source": "claude", "created_time": 1738700000000, "updated_time": 1738700600000,
+     "messages": [
+      {"role": "user", "content": "My C++ linked list program crashes with Segmentation fault (core dumped) when I delete a node."},
+      {"role": "model", "content": "You probably dereference a pointer after `delete`. Set it to nullptr after freeing, and check `node->next` before using it. Run the program under valgrind or compile with `-fsanitize=address -g` to see the exact line."},
+      {"role": "user", "content": "AddressSanitizer says heap-use-after-free in removeNode."},
+      {"role": "model", "content": "Save `node->next` in a temporary before `delete node;` and link the previous node to that temporary. Consider std::unique_ptr so ownership is automatic."}
+     ]},
+    {"id": "eval-git-rebase", "title": "Recovering lost commits", "source": "chatgpt", "created_time": 1739000000000, "updated_time": 1739000400000,
+     "messages": [
+      {"role": "user", "content": "I did an interactive rebase, messed up the conflicts and now two commits are gone. Can I undo it?"},
+      {"role": "model", "content": "Yes. `git reflog` shows where HEAD was before the rebase. Find the entry like `HEAD@{5}: rebase -i (start)` and run `git reset --hard HEAD@{6}` (the entry just before it), or `git reset --hard ORIG_HEAD` right after a rebase."}
+     ]},
+    {"id": "eval-git-secret", "title": "Leaked credentials in repo", "source": "gemini", "created_time": 1739300000000, "updated_time": 1739300900000,
+     "messages": [
+      {"role": "user", "content": "I accidentally committed my .env file with an OpenAI key and pushed it to GitHub."},
+      {"role": "model", "content": "First revoke and rotate the key immediately: assume it is compromised. Then remove it from history with `git filter-repo --path .env --invert-paths` (or BFG), force-push, and add .env to .gitignore. GitHub secret scanning may already have flagged it."},
+      {"role": "user", "content": "Is deleting the file in a new commit enough?"},
+      {"role": "model", "content": "No, the key stays in the earlier commits and anyone can check them out."}
+     ]},
+    {"id": "eval-sql-index", "title": "Speeding up an orders query", "source": "claude", "created_time": 1739600000000, "updated_time": 1739600500000,
+     "messages": [
+      {"role": "user", "content": "SELECT * FROM orders WHERE customer_id = 42 ORDER BY created_at DESC LIMIT 20 takes 4 seconds in Postgres."},
+      {"role": "model", "content": "Run `EXPLAIN ANALYZE` on it; you will likely see a Seq Scan on orders. A composite index `CREATE INDEX ON orders (customer_id, created_at DESC);` lets Postgres read just 20 rows. Also avoid SELECT * if you only need a few columns."},
+      {"role": "user", "content": "Down to 3 ms. Wow."}
+     ]},
+    {"id": "eval-sqlite-fts", "title": "Searching notes in SQLite", "source": "gemini", "created_time": 1739900000000, "updated_time": 1739900400000,
+     "messages": [
+      {"role": "user", "content": "I store notes in SQLite and LIKE '%word%' is slow. Is there something better?"},
+      {"role": "model", "content": "Use the FTS5 extension: `CREATE VIRTUAL TABLE notes_fts USING fts5(body)`, then `SELECT * FROM notes_fts WHERE notes_fts MATCH 'word' ORDER BY rank`. Ranking uses bm25. The porter tokenizer adds English stemming so 'running' matches 'run'."}
+     ]},
+    {"id": "eval-regex-email", "title": "Validate addresses with regex", "source": "chatgpt", "created_time": 1740200000000, "updated_time": 1740200300000,
+     "messages": [
+      {"role": "user", "content": "Give me a regex that checks whether a string is a valid e-mail address."},
+      {"role": "model", "content": "A practical pattern is `^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$`. Full RFC 5322 validation by regex is impractical; the only real test is sending a confirmation email."}
+     ]},
+    {"id": "eval-excel-lookup", "title": "Spreadsheet lookup shows #N/A", "source": "gemini", "created_time": 1740500000000, "updated_time": 1740500400000,
+     "messages": [
+      {"role": "user", "content": "My VLOOKUP returns #N/A even though the product code is clearly in the other sheet."},
+      {"role": "model", "content": "Usually the values differ invisibly: trailing spaces or numbers stored as text. Try `=VLOOKUP(TRIM(A2), Sheet2!A:B, 2, FALSE)` and make sure the 4th argument is FALSE for an exact match. In Excel 365 XLOOKUP is easier: `=XLOOKUP(A2, Sheet2!A:A, Sheet2!B:B, \"missing\")`."}
+     ]},
+    {"id": "eval-budget", "title": "Household budget template", "source": "claude", "created_time": 1740800000000, "updated_time": 1740800600000,
+     "messages": [
+      {"role": "user", "content": "Help me set up a monthly budget. Take-home pay is 3,200 per month."},
+      {"role": "model", "content": "With the 50/30/20 rule: 1,600 for needs (rent, groceries, utilities), 960 for wants, 640 for savings and debt payoff. Track it in a spreadsheet with one row per category and columns for planned vs actual spending."},
+      {"role": "user", "content": "Rent alone is 1,400."},
+      {"role": "model", "content": "Then needs will be closer to 60%. Trim wants to 640 and keep at least 10% for an emergency fund."}
+     ]},
+    {"id": "eval-kyoto", "title": "Kyoto itinerary for 5 days", "source": "gemini", "created_time": 1741100000000, "updated_time": 1741101000000,
+     "messages": [
+      {"role": "user", "content": "Plan five days in Kyoto in April for me and my partner. We like temples, food and walking."},
+      {"role": "model", "content": "Day 1: Fushimi Inari at sunrise, then Tofuku-ji. Day 2: Arashiyama bamboo grove and Tenryu-ji. Day 3: Kiyomizu-dera, Sannenzaka and Gion in the evening. Day 4: day trip to Nara. Day 5: Nishiki Market and the Philosopher's Path for cherry blossoms. Stay one night in a ryokan."},
+      {"role": "user", "content": "Is the JR Pass worth it?"},
+      {"role": "model", "content": "Only if you also travel Tokyo–Kyoto–Hiroshima. For Kyoto and Nara alone, buy individual tickets and an ICOCA card."}
+     ]},
+    {"id": "eval-sourdough", "title": "Sourdough troubleshooting", "source": "chatgpt", "created_time": 1741400000000, "updated_time": 1741400500000,
+     "messages": [
+      {"role": "user", "content": "My loaf came out dense and flat again, almost no oven spring."},
+      {"role": "model", "content": "Most likely the starter was not active enough or the dough was under-proofed. Feed the levain and use it at its peak when it has doubled. Extend bulk fermentation until the dough has grown about 50% and feels airy, and shape with more surface tension."},
+      {"role": "user", "content": "My kitchen is cold, around 18°C."},
+      {"role": "model", "content": "Then bulk fermentation can take 8–10 hours. Use warmer water or put the dough in the oven with only the light on."}
+     ]},
+    {"id": "eval-pho", "title": "Phở bò tại nhà", "source": "gemini", "created_time": 1741700000000, "updated_time": 1741700700000,
+     "messages": [
+      {"role": "user", "content": "Chỉ mình cách nấu phở bò ngon như ngoài tiệm."},
+      {"role": "model", "content": "Nước dùng là quan trọng nhất: chần xương bò rồi ninh 6–8 tiếng. Nướng hành tím và gừng cho thơm, thêm quế, hồi, thảo quả rang. Nêm nước mắm và đường phèn. Bánh phở trụng nhanh, xếp thịt bò tái lên trên rồi chan nước dùng thật sôi."},
+      {"role": "user", "content": "Can I do it in an Instant Pot?"},
+      {"role": "model", "content": "Yes, pressure-cook the beef bones for 90 minutes; the broth will be slightly less clear but very flavourful."}
+     ]},
+    {"id": "eval-marathon", "title": "16-week marathon plan", "source": "claude", "created_time": 1742000000000, "updated_time": 1742000800000,
+     "messages": [
+      {"role": "user", "content": "I ran a half in 1:55. Can you build me a 16 week plan for my first full marathon?"},
+      {"role": "model", "content": "Run 4 days a week. Weeks 1–4 build base mileage from 40 km; long runs grow from 16 km to 32 km by week 13, with every fourth week a cutback week. Include one tempo run and one interval session weekly. Taper for the final three weeks, cutting volume by about 20%, 40% and 60%. Target pace around 5:50/km."},
+      {"role": "user", "content": "What should I eat on long runs?"},
+      {"role": "model", "content": "Practice fueling: one gel every 40–45 minutes after the first hour, plus water."}
+     ]},
+    {"id": "eval-knee", "title": "Pain on the outside of my knee", "source": "gemini", "created_time": 1742300000000, "updated_time": 1742300400000,
+     "messages": [
+      {"role": "user", "content": "The outside of my knee hurts after about 8 km of running, and going downstairs is the worst."},
+      {"role": "model", "content": "That pattern often points to iliotibial band syndrome (IT band). Reduce mileage, avoid downhill running for a while, and strengthen hips and glutes with clamshells and side planks. Foam rolling the outer thigh can relieve tension. If it persists beyond a few weeks, see a physiotherapist."}
+     ]},
+    {"id": "eval-cover-letter", "title": "Cover letter: data analyst", "source": "chatgpt", "created_time": 1742600000000, "updated_time": 1742600600000,
+     "messages": [
+      {"role": "user", "content": "Write a cover letter for a junior data analyst job at a logistics company. I know SQL, Python and Power BI."},
+      {"role": "model", "content": "Dear Hiring Manager,\n\nI am excited to apply for the Junior Data Analyst position. In my last role I built Power BI dashboards that cut weekly reporting time by 6 hours, and I use SQL and Python daily to clean and analyse shipment data...\n\nSincerely,"}
+     ]},
+    {"id": "eval-salary", "title": "Counteroffer advice", "source": "claude", "created_time": 1742900000000, "updated_time": 1742900500000,
+     "messages": [
+      {"role": "user", "content": "I got an offer for 68k but the market rate for the role seems to be around 75k. How do I ask for more without losing the offer?"},
+      {"role": "model", "content": "Thank them, express enthusiasm, then anchor with data: 'Based on market data for this role and my experience with X, I was expecting around 78k. Is there flexibility?' Negotiating politely rarely gets an offer rescinded. If base salary is fixed, ask about a signing bonus, extra vacation or a 6-month review."}
+     ]},
+    {"id": "eval-resume", "title": "Résumé feedback", "source": "gemini", "created_time": 1743200000000, "updated_time": 1743200600000,
+     "messages": [
+      {"role": "user", "content": "Can you review my résumé? It is two pages and I have three years of experience."},
+      {"role": "model", "content": "Cut it to one page. Lead each bullet with an action verb and a measurable result ('Reduced load time by 40%'). Move education below experience, drop the objective statement, and tailor the skills section to each job description so ATS filters pick it up."}
+     ]},
+    {"id": "eval-linreg", "title": "Linear regression explained", "source": "chatgpt", "created_time": 1743500000000, "updated_time": 1743500700000,
+     "messages": [
+      {"role": "user", "content": "Explain linear regression like I'm a beginner."},
+      {"role": "model", "content": "Linear regression fits a straight line y = wx + b through data points. Ordinary least squares picks w and b that minimise the sum of squared errors. R² tells you how much of the variance the line explains. With many features you can solve it with the normal equation or gradient descent."}
+     ]},
+    {"id": "eval-overfit", "title": "Validation loss going up", "source": "claude", "created_time": 1743800000000, "updated_time": 1743800500000,
+     "messages": [
+      {"role": "user", "content": "Training accuracy is 99% but validation accuracy stalls at 70% and validation loss rises after epoch 10."},
+      {"role": "model", "content": "Your network overfits the training set. Add regularization: dropout (0.3–0.5), weight decay, data augmentation, and early stopping on validation loss. A smaller model or more data also helps."}
+     ]},
+    {"id": "eval-attention", "title": "How transformers attend", "source": "gemini", "created_time": 1744100000000, "updated_time": 1744100600000,
+     "messages": [
+      {"role": "user", "content": "How does self-attention in transformers actually work?"},
+      {"role": "model", "content": "Each token is projected into a query, key and value vector. Attention scores are the dot products of a token's query with every key, scaled by √d and passed through softmax; the output is the weighted sum of the values. Multi-head attention runs this several times in parallel with different projections."}
+     ]},
+    {"id": "eval-ru-lease", "title": "Перевод договора аренды", "source": "gemini", "created_time": 1744400000000, "updated_time": 1744400500000,
+     "messages": [
+      {"role": "user", "content": "Переведи на английский пункт договора аренды квартиры: «Арендатор обязуется вносить арендную плату не позднее 5-го числа каждого месяца»."},
+      {"role": "model", "content": "\"The Tenant shall pay the rent no later than the 5th day of each month.\" В договорах аренды обычно используют shall вместо will."},
+      {"role": "user", "content": "А как перевести «залог»?"},
+      {"role": "model", "content": "Security deposit."}
+     ]},
+    {"id": "eval-vi-english", "title": "Học tiếng Anh hiệu quả", "source": "chatgpt", "created_time": 1744700000000, "updated_time": 1744700600000,
+     "messages": [
+      {"role": "user", "content": "Mình đi làm cả ngày, mỗi tối chỉ có 30 phút. Làm sao để học tiếng Anh hiệu quả?"},
+      {"role": "model", "content": "Chia 30 phút: 10 phút ôn từ vựng bằng Anki, 10 phút nghe podcast hoặc xem video có phụ đề tiếng Anh, 10 phút shadowing để luyện phát âm. Học đều mỗi ngày quan trọng hơn học nhiều một lúc."}
+     ]},
+    {"id": "eval-mortgage", "title": "Fixed or variable rate?", "source": "claude", "created_time": 1745000000000, "updated_time": 1745000500000,
+     "messages": [
+      {"role": "user", "content": "We are buying our first home. Should we take a fixed-rate or a variable-rate mortgage?"},
+      {"role": "model", "content": "A fixed rate gives predictable payments for the term; a variable rate is usually cheaper at the start but can rise with central bank rates. If your budget can't absorb a 2-point increase in the interest rate, prefer fixed. Compare the APR and early repayment penalties."}
+     ]},
+    {"id": "eval-freelance-tax", "title": "Quarterly estimated taxes", "source": "chatgpt", "created_time": 1745300000000, "updated_time": 1745300600000,
+     "messages": [
+      {"role": "user", "content": "I just started freelancing and got paid on a 1099. Do I have to pay taxes every quarter?"},
+      {"role": "model", "content": "Yes. As self-employed you pay estimated tax quarterly (Form 1040-ES), covering income tax plus 15.3% self-employment tax. Set aside 25–30% of each payment and keep receipts for deductible business expenses like your laptop and home office."}
+     ]},
+    {"id": "eval-cat", "title": "Cat throwing up", "source": "gemini", "created_time": 1745600000000, "updated_time": 1745600400000,
+     "messages": [
+      {"role": "user", "content": "My cat vomits a couple of times a week, usually right after eating."},
+      {"role": "model", "content": "Eating too fast is a common cause; try a slow-feeder bowl or smaller, more frequent meals. Hairballs are another cause, so regular brushing helps. Take her to the vet if she vomits daily, loses weight, or seems lethargic."}
+     ]},
+    {"id": "eval-monstera", "title": "Monstera turning yellow", "source": "claude", "created_time": 1745900000000, "updated_time": 1745900400000,
+     "messages": [
+      {"role": "user", "content": "The lower leaves of my monstera are going yellow and droopy."},
+      {"role": "model", "content": "That is most often overwatering. Let the top 5 cm of soil dry out between waterings, make sure the pot has drainage holes, and check the roots: brown, mushy roots mean root rot, so trim them and repot in chunky aroid mix."}
+     ]},
+    {"id": "eval-best-man", "title": "Best man speech", "source": "chatgpt", "created_time": 1746200000000, "updated_time": 1746200800000,
+     "messages": [
+      {"role": "user", "content": "My brother is getting married in June and I have to give the toast. I'm terrible at public speaking."},
+      {"role": "model", "content": "Keep it to 3–4 minutes. Open with who you are, tell one short funny story about your brother, then turn sincere: how his partner makes him better. End by raising a glass to the couple. Practise out loud five times and print it on cards."}
+     ]},
+    {"id": "eval-react-effect", "title": "Effect running twice", "source": "gemini", "created_time": 1746500000000, "updated_time": 1746500500000,
+     "messages": [
+      {"role": "user", "content": "Why does my useEffect fetch data twice when the component mounts?"},
+      {"role": "model", "content": "In development React 18 StrictMode mounts, unmounts and remounts components to surface missing cleanup, so effects run twice. It does not happen in production. Return a cleanup function (for example an AbortController) and check your dependency array."}
+     ]},
+    {"id": "eval-ts-generics", "title": "Generic constraints in TypeScript", "source": "claude", "created_time": 1746800000000, "updated_time": 1746800400000,
+     "messages": [
+      {"role": "user", "content": "How do I write a TypeScript function getProp(obj, key) that only accepts keys that exist on obj?"},
+      {"role": "model", "content": "Use a generic constraint with keyof: `function getProp<T, K extends keyof T>(obj: T, key: K): T[K] { return obj[key]; }`. The compiler then rejects keys that are not properties of T and infers the return type."}
+     ]},
+    {"id": "eval-bash-rename", "title": "Bulk renaming files", "source": "chatgpt", "created_time": 1747100000000, "updated_time": 1747100300000,
+     "messages": [
+      {"role": "user", "content": "I have 300 photos named IMG_0001.JPG etc. How do I rename them all to holiday_0001.jpg in bash?"},
+      {"role": "model", "content": "for f in IMG_*.JPG; do n=${f#IMG_}; mv -- \"$f\" \"holiday_${n%.JPG}.jpg\"; done\n\nRun it first with `echo mv` instead of `mv` to preview. For nested folders combine `find . -name 'IMG_*.JPG' -exec ...` or use the `rename` utility."}
+     ]},
+    {"id": "eval-ssh-keys", "title": "Server rejects my key", "source": "gemini", "created_time": 1747400000000, "updated_time": 1747400600000,
+     "messages": [
+      {"role": "user", "content": "ssh user@myserver gives Permission denied (publickey). I copied my key over."},
+      {"role": "model", "content": "Check permissions on the server: `chmod 700 ~/.ssh` and `chmod 600 ~/.ssh/authorized_keys`, owned by your user. Make sure the public key (id_ed25519.pub), not the private key, is in authorized_keys. Run `ssh -v user@myserver` to see which keys are offered, and check /var/log/auth.log."}
+     ]},
+    {"id": "eval-dev-journal", "title": "Weekly dev journal", "source": "claude", "created_time": 1747700000000, "updated_time": 1747701000000,
+     "messages": [
+      {"role": "user", "content": "Summarize my week in bullet points for the standup: worked on the Python service, fixed a Docker build, reviewed a React PR, rebased my git branch, and wrote some SQL for the reporting dashboard."},
+      {"role": "model", "content": "- Python service: progress on the ingestion endpoint\n- Docker: fixed the failing build\n- React: reviewed a teammate's PR\n- Git: rebased the feature branch onto main\n- SQL: wrote queries for the reporting dashboard"},
+      {"role": "user", "content": "Also mention I was out Friday for a dentist appointment."},
+      {"role": "model", "content": "- Out of office Friday (dentist appointment)"}
+     ]},
+    {"id": "eval-trip-budget", "title": "Japan trip costs", "source": "chatgpt", "created_time": 1748000000000, "updated_time": 1748000500000,
+     "messages": [
+      {"role": "user", "content": "Roughly how much should two people budget for 10 days in Tokyo and Osaka, mid-range?"},
+      {"role": "model", "content": "Hotels around ¥15,000–20,000 per night, food ¥6,000 per person per day, local transport ¥1,000 per day each, plus activities. Expect about ¥550,000–650,000 total for two, excluding flights."}
+     ]}
+  ]
+}
