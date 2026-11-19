@@ -64,6 +64,8 @@ def test_ranking_and_safety():
                      "SELECT 'c-bread', id FROM tags WHERE name = 'kubernetes'")
         assert "c-bread" not in [h["id"] for h in VS.rank_conversations(conn, "kubernetes NOT loaf")], \
             "tags don't bypass explicit NOT"
+        assert "c-bread" in [h["id"] for h in VS.rank_conversations(conn, '"kubernetes"')], \
+            "a quoted tag still finds tag-only chats"
         conn.execute("UPDATE conversations SET summary = 'About fermentation' WHERE id = 'c-bread'")
         assert top("fermentation") == ["c-bread"], "summary index follows updates"
         conn.close()

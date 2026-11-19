@@ -147,8 +147,10 @@ def rank_conversations(conn: sqlite3.Connection, text: str, limit: int = 50) -> 
     for cid, name in tag_rows:
         parts = _WORD.findall(name.lower().replace("_", " "))
         hits = sum(1 for t in terms if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
-        # With explicit syntax a tag only boosts chats that already satisfy it.
-        if hits and (not advanced or cid in scores):
+        # With explicit syntax a tag alone admits a chat only when it covers every
+        # term and nothing is excluded ("kubernetes" yes, "python NOT java" no).
+        tag_satisfies = hits == len(terms) and not re.search(r"\bNOT\b", text)
+        if hits and (not advanced or cid in scores or tag_satisfies):
             add(cid, TAG_BONUS * hits)
 
     ranked = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))[:limit]
