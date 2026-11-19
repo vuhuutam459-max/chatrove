@@ -47,7 +47,7 @@ def test_query_terms():
     assert VS.safe_match("!!!") == ""
     assert VS.safe_match("da nang") == '("da" OR "đa") OR "nang"*'
     assert VS.safe_match("đa nang") == '("đa" OR "da") OR "nang"*'
-    assert VS.safe_match("điện") == '("diện"* OR "điện"*)'
+    assert VS.safe_match("điện") == '("điện"* OR "diện"*)'
     assert VS.safe_match("di lam") == '("di" OR "đi") OR "lam"*'
     assert VS.safe_match("nang") == '"nang"*'
     assert '"điđâu"' in VS.safe_match("#điđâu"), "the typed spelling is always searched"
