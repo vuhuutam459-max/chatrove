@@ -59,6 +59,11 @@ def test_ranking_and_safety():
         assert top("sourdough") == ["c-bread"], "title is searchable"
         assert top("C++ segfault") == ["c-cpp"], "punctuation; lone letters don't outrank real terms"
         assert top('"kubectl logs"') == ["c-k8s"], "advanced FTS syntax still works"
+        conn.execute("INSERT INTO tags(name) VALUES ('kubernetes')")
+        conn.execute("INSERT INTO conversation_tags(conversation_id, tag_id) "
+                     "SELECT 'c-bread', id FROM tags WHERE name = 'kubernetes'")
+        assert "c-bread" not in [h["id"] for h in VS.rank_conversations(conn, "kubernetes NOT loaf")], \
+            "tags don't bypass explicit NOT"
         conn.execute("UPDATE conversations SET summary = 'About fermentation' WHERE id = 'c-bread'")
         assert top("fermentation") == ["c-bread"], "summary index follows updates"
         conn.close()
