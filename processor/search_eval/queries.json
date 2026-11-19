@@ -1,5 +1,5 @@
 {
- "_note": "Search-quality benchmark queries over corpus.json. relevant: conv id -> grade (2 = the chat the user wants, 1 = also useful). Categories: keyword, natural, morphology, punctuation, metadata, prefix, i18n, hard (paraphrases / vocabulary mismatch / cross-lingual, added after the fixes and not tuned against).",
+ "_note": "Search-quality benchmark queries over corpus.json. relevant: conv id -> grade (2 = the chat the user wants, 1 = also useful). Categories: keyword, natural, morphology, punctuation, metadata, prefix, i18n, hard (paraphrases / vocabulary mismatch / cross-lingual, added after the fixes and not tuned against). vi: Vietnamese typed with or without diacritics, incl. đ/d.",
  "queries": [
   {
    "id": "kw-asyncio",
@@ -542,6 +542,118 @@
    "query": "phở",
    "relevant": {
     "eval-pho": 2
+   }
+  },
+  {
+   "id": "vi-danang",
+   "category": "vi",
+   "query": "da nang",
+   "relevant": {
+    "eval-vi-danang": 2
+   }
+  },
+  {
+   "id": "vi-danang-trip",
+   "category": "vi",
+   "query": "du lich da nang 3 ngay",
+   "relevant": {
+    "eval-vi-danang": 2
+   }
+  },
+  {
+   "id": "vi-danang-upper",
+   "category": "vi",
+   "query": "ĐÀ NẴNG",
+   "relevant": {
+    "eval-vi-danang": 2
+   }
+  },
+  {
+   "id": "vi-dacsan",
+   "category": "vi",
+   "query": "dac san mi quang",
+   "relevant": {
+    "eval-vi-danang": 2
+   }
+  },
+  {
+   "id": "vi-dienthoai-diac",
+   "category": "vi",
+   "query": "điện thoại chụp ảnh đẹp",
+   "relevant": {
+    "eval-vi-dienthoai": 2
+   }
+  },
+  {
+   "id": "vi-dienthoai-plain",
+   "category": "vi",
+   "query": "dien thoai pin trau",
+   "relevant": {
+    "eval-vi-dienthoai": 2
+   }
+  },
+  {
+   "id": "vi-dongho",
+   "category": "vi",
+   "query": "dong ho",
+   "relevant": {
+    "eval-vi-dongho": 2
+   }
+  },
+  {
+   "id": "vi-dongho-dung",
+   "category": "vi",
+   "query": "dong ho bi dung",
+   "relevant": {
+    "eval-vi-dongho": 2
+   }
+  },
+  {
+   "id": "vi-dongho-diac",
+   "category": "vi",
+   "query": "đồng hồ đeo tay",
+   "relevant": {
+    "eval-vi-dongho": 2
+   }
+  },
+  {
+   "id": "vi-dilam-plain",
+   "category": "vi",
+   "query": "di lam",
+   "relevant": {
+    "eval-vi-english": 2
+   }
+  },
+  {
+   "id": "vi-dilam-diac",
+   "category": "vi",
+   "query": "đi làm mỗi tối",
+   "relevant": {
+    "eval-vi-english": 2
+   }
+  },
+  {
+   "id": "vi-dondep",
+   "category": "vi",
+   "query": "don dep nha cua",
+   "relevant": {
+    "eval-vi-dondep": 2
+   }
+  },
+  {
+   "id": "vi-nangnong",
+   "category": "vi",
+   "query": "nang nong",
+   "relevant": {
+    "eval-vi-nangnong": 2
+   }
+  },
+  {
+   "id": "vi-hokhan",
+   "category": "vi",
+   "query": "be bi ho khan",
+   "relevant": {
+    "eval-vi-hokhan": 2
    }
   }
  ]

@@ -28,6 +28,7 @@ def _seed(conn):
         ("c-k8s", "Pod keeps restarting", ["My pod is restarting", "Check kubectl logs --previous"]),
         ("c-cpp", "Linked list crash", ["C++ segfault on delete", "Use valgrind"]),
         ("c-bread", "Sourdough troubleshooting", ["Loaf came out dense at 18°C"]),
+        ("c-vi", "Du lịch Đà Nẵng", ["Mình đi làm cả ngày", "tu van dien thoai"]),
     ]:
         conn.execute("INSERT INTO conversations(id, account_id, title) VALUES (?, 1, ?)", (cid, title))
         for seq, text in enumerate(msgs):
@@ -44,6 +45,12 @@ def test_query_terms():
     assert VS.safe_match("ssh: node.js") == '"ssh" OR "node" OR "js"*'
     assert VS.safe_match("договор аренды") == '"договор"* OR "аренды"*'
     assert VS.safe_match("!!!") == ""
+    assert VS.safe_match("da nang") == '("da" OR "đa") OR "nang"*'
+    assert VS.safe_match("điện") == '("diện"* OR "điện"*)'
+    assert VS.safe_match("di lam") == '("di" OR "đi") OR "lam"*'
+    assert VS.safe_match("nang") == '"nang"*'
+    assert VS.safe_match("договор") == '"договор"*'
+
     print("  OK  query_terms / safe_match")
 
 
@@ -57,6 +64,8 @@ def test_ranking_and_safety():
         assert top("restarts") == ["c-k8s"], "porter stemming"
         assert top("kube") == ["c-k8s"], "prefix on last term"
         assert top("sourdough") == ["c-bread"], "title is searchable"
+        for q in ["da nang", "ĐÀ NẴNG", "di lam", "điện thoại", "dien"]:
+            assert top(q) == ["c-vi"], f"Vietnamese d/đ folding: {q}"
         assert top("C++ segfault") == ["c-cpp"], "punctuation; lone letters don't outrank real terms"
         assert top('"kubectl logs"') == ["c-k8s"], "advanced FTS syntax still works"
         conn.execute("INSERT INTO tags(name) VALUES ('kubernetes')")

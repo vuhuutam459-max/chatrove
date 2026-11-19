@@ -2,13 +2,13 @@
  "summary": {
   "search": {
    "ALL": {
-    "hit@1": 0.9552238805970149,
-    "R@5": 0.9577114427860695,
-    "MRR": 0.9651741293532337,
-    "nDCG@10": 0.9649035233670636,
-    "zero": 0.014925373134328358,
+    "hit@1": 0.9629629629629629,
+    "R@5": 0.9650205761316871,
+    "MRR": 0.97119341563786,
+    "nDCG@10": 0.9709695810567069,
+    "zero": 0.012345679012345678,
     "error": 0.0,
-    "n": 67
+    "n": 81
    },
    "keyword": {
     "hit@1": 1.0,
@@ -81,17 +81,26 @@
     "zero": 0.07142857142857142,
     "error": 0.0,
     "n": 14
+   },
+   "vi": {
+    "hit@1": 1.0,
+    "R@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@10": 1.0,
+    "zero": 0.0,
+    "error": 0.0,
+    "n": 14
    }
   },
   "ask": {
    "ALL": {
-    "hit@1": 0.9552238805970149,
-    "R@5": 0.9577114427860695,
-    "MRR": 0.9651741293532337,
-    "nDCG@10": 0.9649035233670636,
-    "zero": 0.014925373134328358,
+    "hit@1": 0.9629629629629629,
+    "R@5": 0.9650205761316871,
+    "MRR": 0.97119341563786,
+    "nDCG@10": 0.9709695810567069,
+    "zero": 0.012345679012345678,
     "error": 0.0,
-    "n": 67
+    "n": 81
    },
    "keyword": {
     "hit@1": 1.0,
@@ -162,6 +171,15 @@
     "MRR": 0.8333333333333333,
     "nDCG@10": 0.8438122569862886,
     "zero": 0.07142857142857142,
+    "error": 0.0,
+    "n": 14
+   },
+   "vi": {
+    "hit@1": 1.0,
+    "R@5": 1.0,
+    "MRR": 1.0,
+    "nDCG@10": 1.0,
+    "zero": 0.0,
     "error": 0.0,
     "n": 14
    }
@@ -2100,6 +2118,7 @@
     "search": [
      "eval-pho",
      "eval-k8s-crashloop",
+     "eval-vi-dongho",
      "eval-sqlite-fts",
      "eval-cat",
      "eval-salary"
@@ -2107,6 +2126,7 @@
     "ask": [
      "eval-pho",
      "eval-k8s-crashloop",
+     "eval-vi-dongho",
      "eval-sqlite-fts",
      "eval-cat",
      "eval-salary"
@@ -2142,10 +2162,12 @@
    "ranked": {
     "search": [
      "eval-vi-english",
+     "eval-vi-dienthoai",
      "eval-pho"
     ],
     "ask": [
      "eval-vi-english",
+     "eval-vi-dienthoai",
      "eval-pho"
     ]
    },
@@ -2489,11 +2511,13 @@
    "ranked": {
     "search": [
      "eval-sqlite-fts",
-     "eval-dev-journal"
+     "eval-dev-journal",
+     "eval-vi-dienthoai"
     ],
     "ask": [
      "eval-sqlite-fts",
-     "eval-dev-journal"
+     "eval-dev-journal",
+     "eval-vi-dienthoai"
     ]
    },
    "errors": {},
@@ -2689,7 +2713,7 @@
      "eval-sqlite-fts",
      "eval-trip-budget",
      "eval-overfit",
-     "eval-ru-lease"
+     "eval-freelance-tax"
     ],
     "ask": [
      "eval-kyoto",
@@ -2730,11 +2754,20 @@
    "ranked": {
     "search": [
      "eval-vi-english",
+     "eval-vi-nangnong",
+     "eval-vi-dienthoai",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-danang",
      "eval-pho"
     ],
     "ask": [
      "eval-vi-english",
-     "eval-pho"
+     "eval-vi-nangnong",
+     "eval-vi-dienthoai",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-danang"
     ]
    },
    "errors": {},
@@ -2767,11 +2800,592 @@
    "ranked": {
     "search": [
      "eval-pho",
-     "eval-bash-rename"
+     "eval-bash-rename",
+     "eval-vi-nangnong",
+     "eval-vi-dondep"
     ],
     "ask": [
      "eval-pho",
-     "eval-bash-rename"
+     "eval-bash-rename",
+     "eval-vi-nangnong",
+     "eval-vi-dondep"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-danang",
+   "category": "vi",
+   "query": "da nang",
+   "relevant": {
+    "eval-vi-danang": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-danang",
+     "eval-vi-nangnong",
+     "eval-vi-dongho"
+    ],
+    "ask": [
+     "eval-vi-danang",
+     "eval-vi-nangnong",
+     "eval-vi-dongho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-danang-trip",
+   "category": "vi",
+   "query": "du lich da nang 3 ngay",
+   "relevant": {
+    "eval-vi-danang": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-danang",
+     "eval-vi-dondep",
+     "eval-vi-nangnong",
+     "eval-vi-dongho",
+     "eval-vi-english"
+    ],
+    "ask": [
+     "eval-vi-danang",
+     "eval-vi-dondep",
+     "eval-vi-nangnong",
+     "eval-vi-dongho",
+     "eval-vi-english"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-danang-upper",
+   "category": "vi",
+   "query": "ĐÀ NẴNG",
+   "relevant": {
+    "eval-vi-danang": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-danang",
+     "eval-vi-nangnong",
+     "eval-vi-dongho"
+    ],
+    "ask": [
+     "eval-vi-danang",
+     "eval-vi-nangnong",
+     "eval-vi-dongho"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dacsan",
+   "category": "vi",
+   "query": "dac san mi quang",
+   "relevant": {
+    "eval-vi-danang": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-danang"
+    ],
+    "ask": [
+     "eval-vi-danang"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dienthoai-diac",
+   "category": "vi",
+   "query": "điện thoại chụp ảnh đẹp",
+   "relevant": {
+    "eval-vi-dienthoai": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-dienthoai",
+     "eval-vi-english",
+     "eval-vi-dondep",
+     "eval-k8s-crashloop",
+     "eval-ru-lease",
+     "eval-react-effect",
+     "eval-py-pypi"
+    ],
+    "ask": [
+     "eval-vi-dienthoai",
+     "eval-vi-english",
+     "eval-vi-dondep",
+     "eval-k8s-crashloop",
+     "eval-ru-lease",
+     "eval-react-effect"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dienthoai-plain",
+   "category": "vi",
+   "query": "dien thoai pin trau",
+   "relevant": {
+    "eval-vi-dienthoai": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-dienthoai"
+    ],
+    "ask": [
+     "eval-vi-dienthoai"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dongho",
+   "category": "vi",
+   "query": "dong ho",
+   "relevant": {
+    "eval-vi-dongho": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-dongho",
+     "eval-attention",
+     "eval-vi-english",
+     "eval-vi-hokhan",
+     "eval-budget",
+     "eval-mortgage",
+     "eval-bash-rename",
+     "eval-py-asyncio",
+     "eval-marathon",
+     "eval-trip-budget"
+    ],
+    "ask": [
+     "eval-vi-dongho",
+     "eval-attention",
+     "eval-vi-english",
+     "eval-vi-hokhan",
+     "eval-budget",
+     "eval-mortgage"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dongho-dung",
+   "category": "vi",
+   "query": "dong ho bi dung",
+   "relevant": {
+    "eval-vi-dongho": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-pho",
+     "eval-cover-letter"
+    ],
+    "ask": [
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-pho",
+     "eval-cover-letter"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dongho-diac",
+   "category": "vi",
+   "query": "đồng hồ đeo tay",
+   "relevant": {
+    "eval-vi-dongho": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-pho",
+     "eval-vi-nangnong",
+     "eval-vi-dondep",
+     "eval-resume"
+    ],
+    "ask": [
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-pho",
+     "eval-vi-nangnong",
+     "eval-vi-dondep",
+     "eval-resume"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dilam-plain",
+   "category": "vi",
+   "query": "di lam",
+   "relevant": {
+    "eval-vi-english": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-english",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-nangnong"
+    ],
+    "ask": [
+     "eval-vi-english",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-nangnong"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dilam-diac",
+   "category": "vi",
+   "query": "đi làm mỗi tối",
+   "relevant": {
+    "eval-vi-english": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-english",
+     "eval-vi-nangnong",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-danang"
+    ],
+    "ask": [
+     "eval-vi-english",
+     "eval-vi-nangnong",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-danang"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-dondep",
+   "category": "vi",
+   "query": "don dep nha cua",
+   "relevant": {
+    "eval-vi-dondep": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-dondep",
+     "eval-vi-dienthoai",
+     "eval-pho",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-nangnong"
+    ],
+    "ask": [
+     "eval-vi-dondep",
+     "eval-vi-dienthoai",
+     "eval-pho",
+     "eval-vi-dongho",
+     "eval-vi-hokhan",
+     "eval-vi-nangnong"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-nangnong",
+   "category": "vi",
+   "query": "nang nong",
+   "relevant": {
+    "eval-vi-nangnong": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-nangnong",
+     "eval-vi-danang"
+    ],
+    "ask": [
+     "eval-vi-nangnong",
+     "eval-vi-danang"
+    ]
+   },
+   "errors": {},
+   "scores": {
+    "search": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    },
+    "ask": {
+     "hit@1": 1.0,
+     "R@5": 1.0,
+     "MRR": 1.0,
+     "nDCG@10": 1.0,
+     "zero": 0.0,
+     "error": 0.0
+    }
+   }
+  },
+  {
+   "id": "vi-hokhan",
+   "category": "vi",
+   "query": "be bi ho khan",
+   "relevant": {
+    "eval-vi-hokhan": 2
+   },
+   "ranked": {
+    "search": [
+     "eval-vi-hokhan",
+     "eval-vi-dongho",
+     "eval-cover-letter"
+    ],
+    "ask": [
+     "eval-vi-hokhan",
+     "eval-vi-dongho",
+     "eval-cover-letter"
     ]
    },
    "errors": {},

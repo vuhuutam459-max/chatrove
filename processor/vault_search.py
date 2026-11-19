@@ -60,8 +60,25 @@ def query_terms(text: str) -> list[str]:
     return list(dict.fromkeys(kept))
 
 
+def fold_d(text: str) -> str:
+    """Vietnamese đ/Đ -> d/D. unicode61's remove_diacritics leaves đ alone
+    (it is its own letter, not d plus a mark), so "da nang" misses "Đà Nẵng"."""
+    return text.replace("đ", "d").replace("Đ", "D")
+
+
+def _spellings(term: str) -> list[str]:
+    # đ only starts a Vietnamese syllable, so a word typed with a leading d may
+    # be stored as đ (and the other way round when typed without diacritics).
+    base = fold_d(term)
+    if " " in base or not base.startswith("d"):
+        return [term]
+    return list(dict.fromkeys([base, "đ" + base[1:]]))
+
+
 def _term_expr(term: str, prefix: bool) -> str:
-    return f'"{term}"*' if prefix else f'"{term}"'
+    star = "*" if prefix else ""
+    forms = [f'"{t}"{star}' for t in _spellings(term)]
+    return forms[0] if len(forms) == 1 else "(" + " OR ".join(forms) + ")"
 
 
 def _wants_prefix(term: str, is_last: bool) -> bool:
@@ -145,8 +162,9 @@ def rank_conversations(conn: sqlite3.Connection, text: str, limit: int = 50) -> 
         "SELECT ct.conversation_id, t.name FROM conversation_tags ct "
         "JOIN tags t ON t.id = ct.tag_id").fetchall()
     for cid, name in tag_rows:
-        parts = _WORD.findall(name.lower().replace("_", " "))
-        hits = sum(1 for t in terms if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
+        parts = _WORD.findall(fold_d(name.lower().replace("_", " ")))
+        folded = [fold_d(t) for t in terms]
+        hits = sum(1 for t in folded if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
         # With explicit syntax a tag alone admits a chat only when it covers every
         # term and nothing is excluded ("kubernetes" yes, "python NOT java" no).
         tag_satisfies = hits == len(terms) and not re.search(r"\bNOT\b", text)
