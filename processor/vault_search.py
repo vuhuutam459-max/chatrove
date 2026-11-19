@@ -37,15 +37,26 @@ MSG_CANDIDATES = 500    # per-term cap on matching messages considered
 
 _ADVANCED = re.compile(r'"|\*\s*$|\b(AND|OR|NOT|NEAR)\b')
 _WORD = re.compile(r"\w+", re.UNICODE)
+_COMPOUND = re.compile(r"\w+(?:[/.\-']\w+)*", re.UNICODE)
 
 
 def query_terms(text: str) -> list[str]:
     """Lower-cased, de-duplicated word tokens with stopwords removed
     (all tokens are kept if the query is nothing but stopwords)."""
-    words = [w.lower() for w in _WORD.findall(text or "")]
+    words = []
+    for chunk in _COMPOUND.findall(text or ""):
+        parts = _WORD.findall(chunk)
+        # "N/A" -> the phrase "n a": its letters alone would match everywhere.
+        if len(parts) > 1 and all(len(p) == 1 for p in parts):
+            words.append(" ".join(parts).lower())
+        else:
+            words.extend(p.lower() for p in parts)
     words = [w.replace("_", " ").strip() for w in words]
     words = [w for w in words if w]
     kept = [w for w in words if w not in STOPWORDS] or words
+    # A lone ASCII letter ("c" from "C++", "s" from "it's") matches nearly
+    # everything, so it only counts when the query has nothing longer.
+    kept = [w for w in kept if len(w) > 1 or not w.isascii()] or kept
     return list(dict.fromkeys(kept))
 
 

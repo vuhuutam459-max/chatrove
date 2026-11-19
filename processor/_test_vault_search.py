@@ -27,7 +27,7 @@ def _seed(conn):
     for cid, title, msgs in [
         ("c-k8s", "Pod keeps restarting", ["My pod is restarting", "Check kubectl logs --previous"]),
         ("c-cpp", "Linked list crash", ["C++ segfault on delete", "Use valgrind"]),
-        ("c-bread", "Sourdough troubleshooting", ["Loaf came out dense"]),
+        ("c-bread", "Sourdough troubleshooting", ["Loaf came out dense at 18°C"]),
     ]:
         conn.execute("INSERT INTO conversations(id, account_id, title) VALUES (?, 1, ?)", (cid, title))
         for seq, text in enumerate(msgs):
@@ -37,7 +37,9 @@ def _seed(conn):
 
 
 def test_query_terms():
-    assert VS.query_terms("What's the C++ error?") == ["c", "error"]
+    assert VS.query_terms("What's the C++ error?") == ["error"]
+    assert VS.query_terms("C++") == ["c"]
+    assert VS.query_terms("#N/A error") == ["n a", "error"]
     assert VS.query_terms("the") == ["the"]
     assert VS.safe_match("ssh: node.js") == '"ssh" OR "node" OR "js"*'
     assert VS.safe_match("договор аренды") == '"договор"* OR "аренды"*'
@@ -55,7 +57,7 @@ def test_ranking_and_safety():
         assert top("restarts") == ["c-k8s"], "porter stemming"
         assert top("kube") == ["c-k8s"], "prefix on last term"
         assert top("sourdough") == ["c-bread"], "title is searchable"
-        assert top("C++ segfault") == ["c-cpp"], "punctuation"
+        assert top("C++ segfault") == ["c-cpp"], "punctuation; lone letters don't outrank real terms"
         assert top('"kubectl logs"') == ["c-k8s"], "advanced FTS syntax still works"
         conn.execute("UPDATE conversations SET summary = 'About fermentation' WHERE id = 'c-bread'")
         assert top("fermentation") == ["c-bread"], "summary index follows updates"

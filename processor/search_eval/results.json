@@ -1392,12 +1392,10 @@
    },
    "ranked": {
     "search": [
-     "eval-cpp-segfault",
-     "eval-sourdough"
+     "eval-cpp-segfault"
     ],
     "ask": [
-     "eval-cpp-segfault",
-     "eval-sourdough"
+     "eval-cpp-segfault"
     ]
    },
    "errors": {},
@@ -1505,14 +1503,12 @@
     "search": [
      "eval-excel-lookup",
      "eval-py-venv",
-     "eval-bash-rename",
      "eval-nginx-proxy",
      "eval-linreg"
     ],
     "ask": [
      "eval-excel-lookup",
      "eval-py-venv",
-     "eval-bash-rename",
      "eval-nginx-proxy",
      "eval-linreg"
     ]
