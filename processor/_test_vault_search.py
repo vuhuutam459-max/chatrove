@@ -82,6 +82,12 @@ def test_ranking_and_safety():
             "tags don't bypass explicit NOT"
         assert "c-bread" in [h["id"] for h in VS.rank_conversations(conn, '"kubernetes"')], \
             "a quoted tag still finds tag-only chats"
+        conn.execute("INSERT INTO tags(name) VALUES ('đao')")
+        conn.execute("INSERT INTO conversation_tags(conversation_id, tag_id) "
+                     "SELECT 'c-cpp', id FROM tags WHERE name = 'đao'")
+        assert "c-cpp" in [h["id"] for h in VS.rank_conversations(conn, "dao")], "tags fold d/đ"
+        assert "c-cpp" not in [h["id"] for h in VS.rank_conversations(conn, '"dao"')], \
+            "quoted spelling is literal for tags too"
         conn.execute("UPDATE conversations SET summary = 'About fermentation' WHERE id = 'c-bread'")
         assert top("fermentation") == ["c-bread"], "summary index follows updates"
         conn.close()

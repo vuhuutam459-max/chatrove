@@ -179,9 +179,11 @@ def rank_conversations(conn: sqlite3.Connection, text: str, limit: int = 50) -> 
         "SELECT ct.conversation_id, t.name FROM conversation_tags ct "
         "JOIN tags t ON t.id = ct.tag_id").fetchall()
     for cid, name in tag_rows:
-        parts = _WORD.findall(fold_d(name.lower().replace("_", " ")))
-        folded = [fold_d(t) for t in terms]
-        hits = sum(1 for t in folded if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
+        # Explicit syntax is literal, so its tags are compared without d/đ folding.
+        norm = (lambda x: x) if advanced else fold_d
+        parts = _WORD.findall(norm(name.lower().replace("_", " ")))
+        keys = [norm(t) for t in terms]
+        hits = sum(1 for t in keys if any(p == t or (len(t) >= 3 and p.startswith(t)) for p in parts))
         # With explicit syntax a tag alone admits a chat only when it covers every
         # term and nothing is excluded ("kubernetes" yes, "python NOT java" no).
         tag_satisfies = hits == len(terms) and not re.search(r"\bNOT\b", text)
