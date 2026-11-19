@@ -282,11 +282,13 @@ class VaultHandler(SimpleHTTPRequestHandler):
         conn = get_db()
         try:
             for hit in vault_search.rank_conversations(conn, question, limit=6):
-                title = conn.execute("SELECT title FROM conversations WHERE id = ?",
-                                     (hit["id"],)).fetchone()
+                conv = conn.execute("SELECT title, summary FROM conversations WHERE id = ?",
+                                    (hit["id"],)).fetchone()
                 msg = vault_search.best_message(conn, hit["id"], hit["match"], "[", "]", 18)
-                sources.append({"id": hit["id"], "title": title["title"] if title else "",
-                                "snippet": msg["snippet"] if msg else ""})
+                # Title/summary-only hits: give the model the summary as the excerpt.
+                snippet = msg["snippet"] if msg else ((conv["summary"] or "") if conv else "")
+                sources.append({"id": hit["id"], "title": conv["title"] if conv else "",
+                                "snippet": snippet})
         except sqlite3.OperationalError:
             sources = []
         finally:
